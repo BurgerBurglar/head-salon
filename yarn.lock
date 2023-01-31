@@ -428,7 +428,7 @@ ast-types-flow@^0.0.7:
   resolved "https://registry.yarnpkg.com/ast-types-flow/-/ast-types-flow-0.0.7.tgz#f70b735c6bca1a5c9c22d982c3e39e7feba3bdad"
   integrity sha512-eBvWn1lvIApYMhzQMsu9ciLfkBY499mFZlNqG+/9WR7PVlroQw0vG30cOQQbaKz3sCEc44TAOu2ykzqXSNnwag==
 
-autoprefixer@^10.4.7:
+autoprefixer@^10.4.13:
   version "10.4.13"
   resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-10.4.13.tgz#b5136b59930209a321e9fa3dca2e7c4d223e83a8"
   integrity sha512-49vKpMqcZYsJjwotvt4+h/BCjJVnhGwcLpDt5xkcaOG3eLrG/HUYLagrihYsQ+qrIBgIzX1Rw7a6L8I/ZA1Atg==
@@ -538,10 +538,20 @@ chokidar@^3.5.3:
   optionalDependencies:
     fsevents "~2.3.2"
 
+class-variance-authority@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/class-variance-authority/-/class-variance-authority-0.4.0.tgz#2ff1b5a836a68ce7a2dac0cc12f6fdc50e47f666"
+  integrity sha512-74enNN8O9ZNieycac/y8FxqgyzZhZbxmCitAtAeUrLPlxjSd5zA7LfpprmxEcOmQBnaGs5hYhiSGnJ0mqrtBLQ==
+
 client-only@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/client-only/-/client-only-0.0.1.tgz#38bba5d403c41ab150bff64a95c85013cf73bca1"
   integrity sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==
+
+clsx@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.2.1.tgz#0ddc4a20a549b59c93a4116bb26f5294ca17dc12"
+  integrity sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==
 
 color-convert@^2.0.1:
   version "2.0.1"
@@ -1612,6 +1622,11 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
+lucide-react@^0.108.0:
+  version "0.108.0"
+  resolved "https://registry.yarnpkg.com/lucide-react/-/lucide-react-0.108.0.tgz#7dd86e31fdb353b9dc5e5df0cdd3342044254148"
+  integrity sha512-dL8F1DZibvqcWRhCrMghFSYpovsKLcoAcLbh1oZNWo1UxadrDesl8K8Eh6qYrWJwvj95bdSA69ZKc8k+KRxrvg==
+
 merge2@^1.3.0, merge2@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/merge2/-/merge2-1.4.1.tgz#4368892f885e907455a6fd7dc55c0c9d404990ae"
@@ -1917,7 +1932,7 @@ postcss@8.4.14:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
-postcss@^8.4.14, postcss@^8.4.18:
+postcss@^8.4.18, postcss@^8.4.21:
   version "8.4.21"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.21.tgz#c639b719a57efc3187b13a1d765675485f4134f4"
   integrity sha512-tP7u/Sn/dVxK2NnruI4H9BG+x+Wxz6oeZ1cJ8P6G/PZY0IKk4k/63TDsQf2kQq3+qoJeLm2kIBUNlZe3zgb4Zg==
@@ -2207,7 +2222,17 @@ synckit@^0.8.4:
     "@pkgr/utils" "^2.3.1"
     tslib "^2.5.0"
 
-tailwindcss@^3.2.0:
+tailwind-merge@^1.9.0:
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-1.9.0.tgz#cc0cbd99c51c729d501122b84968a81595a21da6"
+  integrity sha512-coziXxViLHbVtFvD1+jwSu+UmDJSFX4dhj9ZuqHCuhTzu9Wk5wMedAz5AVY3uUYw95TaO7NwgUS/dLGcWvtgqw==
+
+tailwindcss-animate@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/tailwindcss-animate/-/tailwindcss-animate-1.0.5.tgz#a6720e3b0616e1ff922b32846729881c626a069d"
+  integrity sha512-UU3qrOJ4lFQABY+MVADmBm+0KW3xZyhMdRvejwtXqYOL7YjHYxmuREFAZdmVG5LPe5E9CAst846SLC4j5I3dcw==
+
+tailwindcss@^3.2.4:
   version "3.2.4"
   resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.2.4.tgz#afe3477e7a19f3ceafb48e4b083e292ce0dc0250"
   integrity sha512-AhwtHCKMtR71JgeYDaswmZXhPcW9iuI9Sp2LvZPo9upDZ7231ZJ7eA9RaURbhpXGVlrjX4cFNlB4ieTetEb7hQ==
