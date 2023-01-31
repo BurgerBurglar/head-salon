@@ -64,24 +64,30 @@ const Navbar: React.FC = () => {
         </Button>
       </div>
       {isMenuOpen && (
-        <ul
-          className="fixed right-0 flex h-full min-w-[10em] flex-col gap-4 
-        bg-amber-100 px-4 pt-10 text-center sm:hidden"
-        >
-          {NAV_PATHS.map(({ path, name }) => (
-            <li
-              key={path}
-              className={`
-              pb-1
-              ${path === pathname ? "border-b-4 border-pink-700" : ""}
-               hover:text-pink-700`}
-            >
-              <a href={path} className="px-2">
-                {name}
-              </a>
-            </li>
-          ))}
-        </ul>
+        <div className="fixed right-0 flex h-full w-full">
+          <div
+            className="flex-1 bg-black opacity-30"
+            onClick={() => setIsMenuOpen(false)}
+          />
+          <ul
+            className="flex min-w-[10em] flex-col gap-4 
+      bg-amber-100 px-4 pt-10 text-center sm:hidden"
+          >
+            {NAV_PATHS.map(({ path, name }) => (
+              <li
+                key={path}
+                className={`
+            pb-1
+            ${path === pathname ? "border-b-4 border-pink-700" : ""}
+             hover:text-pink-700`}
+              >
+                <a href={path} className="px-2">
+                  {name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </nav>
   );
