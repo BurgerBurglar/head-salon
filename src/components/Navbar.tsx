@@ -11,7 +11,6 @@ const NAV_PATHS = [
   { path: "/intro", name: "介绍" },
   { path: "/author", name: "作者" },
   { path: "/copyright", name: "版权" },
-  { path: "/about", name: "关于" },
 ];
 
 const Navbar: React.FC = () => {
