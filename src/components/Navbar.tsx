@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 const NAV_PATHS = [
   { path: "/", name: "博文" },
   { path: "/intro", name: "介绍" },
-  { path: "/authors", name: "作者" },
+  { path: "/author", name: "作者" },
   { path: "/copyright", name: "版权" },
   { path: "/about", name: "关于" },
 ];

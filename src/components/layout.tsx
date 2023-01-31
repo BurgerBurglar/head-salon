@@ -11,7 +11,7 @@ const Layout: React.FC<PropsWithChildren> = ({ children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      {children}
+      <div className="mx-auto max-w-3xl p-3">{children}</div>
     </>
   );
 };
