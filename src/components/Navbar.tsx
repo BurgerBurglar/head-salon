@@ -20,14 +20,16 @@ const Navbar: React.FC = () => {
     <nav className="bg-amber-100">
       <div className="mx-auto flex max-w-3xl items-center justify-between px-2">
         <div className="flex items-center gap-3 py-2">
-          <Link href="/">
+          <Link className="flex-shrink-0" href="/">
             <Image src="/favicon.ico" alt="logo" width={50} height={50} />
           </Link>
           <div>
             <h1 className="text-xl font-bold hover:text-pink-700">
               <Link href="/">海德沙龙 (HeadSalon)</Link>
             </h1>
-            <div>A Salon for Heads, No Sofa for Ass</div>
+            <div className="text-[clamp(0.7rem,4vw,1rem)]">
+              A Salon for Heads, No Sofa for Ass
+            </div>
           </div>
         </div>
 
