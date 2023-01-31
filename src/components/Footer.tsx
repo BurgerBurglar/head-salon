@@ -3,7 +3,7 @@ import React from "react";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-slate-800 text-slate-200">
+    <footer className="bg-slate-800 text-sm text-slate-200">
       <div className="mx-auto flex max-w-2xl flex-wrap justify-center gap-x-6">
         <div>
           Copyright © 2005-2023{" "}
