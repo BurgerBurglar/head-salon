@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+#__next {
+  @apply flex min-h-[100dvh] flex-col justify-between;
+}
+
 .article {
   @apply leading-relaxed;
   h2,

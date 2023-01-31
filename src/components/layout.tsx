@@ -1,5 +1,6 @@
 import Head from "next/head";
 import React, { type PropsWithChildren } from "react";
+import Footer from "./Footer";
 import Navbar from "./Navbar";
 
 const Layout: React.FC<PropsWithChildren> = ({ children }) => {
@@ -11,7 +12,8 @@ const Layout: React.FC<PropsWithChildren> = ({ children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <div className="mx-auto max-w-3xl p-3">{children}</div>
+      <div className="mx-auto max-w-3xl flex-1 p-3">{children}</div>
+      <Footer />
     </>
   );
 };
