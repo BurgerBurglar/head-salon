@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 .article {
+  @apply leading-relaxed;
   h2,
   h3 {
     @apply font-bold text-pink-500;
@@ -15,5 +16,8 @@
   }
   ul {
     @apply list-inside list-disc;
+  }
+  p {
+    @apply my-4;
   }
 }
