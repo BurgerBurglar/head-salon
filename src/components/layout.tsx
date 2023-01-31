@@ -1,5 +1,6 @@
 import Head from "next/head";
 import React, { type PropsWithChildren } from "react";
+import Navbar from "./Navbar";
 
 const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
@@ -9,6 +10,7 @@ const Layout: React.FC<PropsWithChildren> = ({ children }) => {
         <meta name="description" content="Blog by WhigZhou" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Navbar />
       {children}
     </>
   );
