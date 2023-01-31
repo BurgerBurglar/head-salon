@@ -34,7 +34,7 @@ const Navbar: React.FC = () => {
             <li
               key={path}
               className={`
-              ${path === pathname ? "border-b-4 border-pink-700" : ""}
+              ${path === pathname ? "border-b-4 border-pink-700 pb-1" : ""}
                hover:text-pink-700`}
             >
               <a href={path} className="px-2">
@@ -68,6 +68,7 @@ const Navbar: React.FC = () => {
             <li
               key={path}
               className={`
+              pb-1
               ${path === pathname ? "border-b-4 border-pink-700" : ""}
                hover:text-pink-700`}
             >
