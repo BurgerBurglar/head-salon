@@ -1,49 +1,30 @@
-import { type NextPage } from "next";
-import ArticleCard from "../components/index/ArticleCard";
+import { type GetStaticProps, type NextPage } from "next";
+import PostCard from "../components/index/PostCard";
+import { getPosts } from "../scraper/fetch";
+import { type PostSummary } from "../types";
 
-const ARTICLES = [
-  {
-    id: 9203,
-    title: "上帝的新牧场#7：扩张与征服",
-    date: new Date("2022-10-08 09:29"),
-    numReads: 3268,
-    category: "未分类",
-    abstract:
-      "设想你正在一块上亿像素分辨率的大屏幕前观看这样一部动画：背景是整个地球表面，其上散布着一些小点，每个点代表一个数十上百人的小群体，点与点的不同颜色显示了其文化差异，每一秒的画面代表了现实中的一年，时长72小时的动画将演示人类最近26万年的历史（这相当于或略长于现代智人的全部历史）。",
-  },
-  {
-    id: 9019,
-    title: "上帝的新牧场#6：屏障种种",
-    date: new Date("2022-09-17 15:01"),
-    numReads: 3349,
-    category: "未分类",
-    abstract:
-      "在生命世界中，没有隔离就不会有结构，也不会有复杂性和多样性，只有当各种生物膜（biomembrane）将有机体区隔成成分不同的多个局部，才有了细胞器，高度分化的细胞，功能各异的器官，并以这些功能性原件搭建出的层层复杂结构；类似的，阶层隔膜在社会不同人群间竖起屏障，令其各自依赖不同生计模式，发展不同的技能与禀赋，形成不同文化特质，也在社会这个“超有机体”（superorganism）中扮演不同角色，和生物膜一样，阶层屏障是选择性通透的（selectively permeable），这一特性也是搭建复杂结构的关键。",
-  },
-  {
-    id: 8984,
-    title: "口罩",
-    date: new Date("2022-04-05 20:26"),
-    numReads: 3349,
-    category: "未分类",
-    abstract: `又想了想口罩的事情，早先我认为，
-      1）口罩若是戴得合适，大概能挡掉一部分病毒，
-      2）而挡掉一部分也是很有价值的，因为感染后果的严重性跟剂量很有关系，对于健康人，很低剂量的感染可能还是好事，相当于接种，
-      3）虽然口罩有这个好处，但强制戴口罩的规定没啥鸟用，因为强制出来的戴，都是很敷衍的，往往选型糟糕，密封不足，重复使用，
-      刚才又想了一下，感觉这种敷衍的戴法不仅没用，还可能有害，我怀疑不少人是因为被逼着戴口罩而染上的，
-      因为人呼出的气里有很多水分，戴口罩时间略长，就在口鼻部营造了一个局部潮湿环境（透气性再好也不能完全避免这一点），本来病毒离开宿主身体后很快会降解，而干燥是加速降解的因素之一，不合适的口罩一方面没挡住多少，同时却延长了没挡住部分的存活时间，总效果可能是负的，
-      一个猜测，不一定错，`,
-  },
-];
+interface Props {
+  posts: PostSummary[];
+}
 
-const Home: NextPage = () => {
+const Home: NextPage<Props> = ({ posts }) => {
   return (
     <main className="flex flex-col">
-      {ARTICLES.map((article) => (
-        <ArticleCard key={article.id} {...article} />
-      ))}
+      {posts.map((post) => {
+        return <PostCard key={post.id} {...post} />;
+      })}
     </main>
   );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  const posts = await getPosts();
+
+  return {
+    props: {
+      posts,
+    },
+  };
 };
 
 export default Home;
