@@ -60,3 +60,11 @@ export const getPosts = async (page: string) => {
   });
   return postAbstract;
 };
+
+export const getNumPosts = async () => {
+  const result = await axiosInstance.get<string>(
+    "/wordpress/wp-content/themes/Salon/catalog-ajax.php?q=count&filter=true"
+  );
+  const numPosts = parseInt(result.data);
+  return numPosts;
+};
