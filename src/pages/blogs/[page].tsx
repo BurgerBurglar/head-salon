@@ -11,6 +11,7 @@ interface Props {
 }
 
 const Home: NextPage<Props> = ({ posts, numPosts }) => {
+  // the first page has 1 more post on headsalon.org
   const numPage = Math.ceil((numPosts - 1) / NUM_POSTS_PER_PAGE);
   return (
     <>

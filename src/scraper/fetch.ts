@@ -58,7 +58,8 @@ export const getPosts = async (page: string) => {
       category,
     };
   });
-  return postAbstract;
+  // remove top post because who cares
+  return postAbstract.filter(({ id }) => id !== 1);
 };
 
 export const getNumPosts = async () => {
