@@ -1,21 +1,9 @@
-import { type GetStaticPaths, type GetStaticProps, type NextPage } from "next";
-import PostCard from "../components/index/PostCard";
+import { type GetStaticProps } from "next";
 import { getPosts } from "../scraper/fetch";
-import { type PostSummary } from "../types";
+import Posts from "./blogs/[page]";
 
-interface Props {
-  posts: PostSummary[];
-}
 
-const Home: NextPage<Props> = ({ posts }) => {
-  return (
-    <main className="flex flex-col">
-      {posts.map((post) => {
-        return <PostCard key={post.id} {...post} />;
-      })}
-    </main>
-  );
-};
+const Home = Posts
 
 export const getStaticProps: GetStaticProps = async () => {
   const posts = await getPosts("1");
