@@ -16,6 +16,7 @@ const NAV_PATHS = [
 const Navbar: React.FC = () => {
   const { asPath: pathname } = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isBlog = pathname === "/" || pathname.includes("/blogs/");
   return (
     <nav className="z-100 fixed w-full bg-amber-100">
       <div className="mx-auto flex max-w-3xl items-center justify-between px-2">
@@ -34,18 +35,21 @@ const Navbar: React.FC = () => {
         </div>
 
         <ul className="mr-2 hidden gap-2 sm:flex">
-          {NAV_PATHS.map(({ path, name }) => (
-            <li
-              key={path}
-              className={`
-              ${path === pathname ? "border-b-4 border-pink-700 pb-1" : ""}
+          {NAV_PATHS.map(({ path, name }) => {
+            const shouldUnderline = isBlog ? path === "/" : path === pathname;
+            return (
+              <li
+                key={path}
+                className={`
+              ${shouldUnderline ? "border-b-4 border-pink-700 pb-1" : ""}
                hover:text-pink-700`}
-            >
-              <a href={path} className="px-2">
-                {name}
-              </a>
-            </li>
-          ))}
+              >
+                <a href={path} className="px-2">
+                  {name}
+                </a>
+              </li>
+            );
+          })}
         </ul>
         <Button
           variant="ghost"
