@@ -17,7 +17,7 @@ const Navbar: React.FC = () => {
   const { asPath: pathname } = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
-    <nav className="bg-amber-100">
+    <nav className="z-100 fixed w-full bg-amber-100">
       <div className="mx-auto flex max-w-3xl items-center justify-between px-2">
         <div className="flex items-center gap-3 py-2">
           <Link className="flex-shrink-0" href="/">
