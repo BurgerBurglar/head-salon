@@ -3,7 +3,12 @@ import axios from "axios";
 import { parse } from "node-html-parser";
 import { SHOULD_USE_TEST_DATA } from "../constants";
 import { type PostSummary } from "../types";
-import { cleanHtml, getIdFromUrl } from "../utils/parse";
+import {
+  cleanHtml,
+  getIdFromUrl,
+  removeFiller,
+  removePrefix,
+} from "../utils/parse";
 import { frontPageHtml } from "./test";
 
 const axiosInstance = axios.create({
@@ -40,7 +45,9 @@ export const getPosts = async () => {
     const category = post.querySelector('[rel="category tag"]')!.text;
 
     const postEntry = post.querySelector(".post-entry")!.text.trim();
-    const abstract = postEntry.substring(0, 100);
+    const contentWithoutFiller = removeFiller(postEntry.substring(0, 200));
+    const contentWithoutTitle = removePrefix(contentWithoutFiller, title);
+    const abstract = removePrefix(contentWithoutTitle, "辉格");
 
     return {
       id,
