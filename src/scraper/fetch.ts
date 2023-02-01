@@ -15,12 +15,12 @@ const axiosInstance = axios.create({
   baseURL: "https://headsalon.org/",
 });
 
-export const getPosts = async () => {
+export const getPosts = async (page: string) => {
   let html: string;
   if (SHOULD_USE_TEST_DATA) {
     html = await new Promise<string>((res) => res(frontPageHtml));
   } else {
-    const result = await axiosInstance.get<string>("/");
+    const result = await axiosInstance.get<string>(`/page/${page}`);
     html = result.data;
   }
   const soup = parse(cleanHtml(html));
