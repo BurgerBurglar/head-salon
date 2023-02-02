@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 
 const NAV_PATHS = [
-  { path: "/", name: "博文" },
+  { path: "/blogs/1", name: "博文" },
   { path: "/intro", name: "介绍" },
   { path: "/author", name: "作者" },
   { path: "/copyright", name: "版权" },
@@ -36,7 +36,9 @@ const Navbar: React.FC = () => {
 
         <ul className="mr-2 hidden gap-2 sm:flex">
           {NAV_PATHS.map(({ path, name }) => {
-            const shouldUnderline = isBlog ? path === "/" : path === pathname;
+            const shouldUnderline = isBlog
+              ? name === "博文"
+              : path === pathname;
             return (
               <li
                 key={path}
