@@ -1,18 +1,17 @@
 import { type GetStaticPaths, type GetStaticProps, type NextPage } from "next";
 import Pagination from "../../components/posts/Pagination";
 import PostCard from "../../components/posts/PostCard";
-import { NUM_POSTS_PER_PAGE } from "../../constants";
-import { getNumPosts, getPosts } from "../../scraper/fetch";
+import { getPosts } from "../../scraper/fetch";
 import { type PostSummary } from "../../types";
+import getNumPages from "../../utils/getNumPages";
 
 interface Props {
   posts: PostSummary[];
-  numPosts: number;
+  numPages: number;
 }
 
-const Home: NextPage<Props> = ({ posts, numPosts }) => {
+const Home: NextPage<Props> = ({ posts, numPages }) => {
   // the first page has 1 more post on headsalon.org
-  const numPage = Math.ceil((numPosts - 1) / NUM_POSTS_PER_PAGE);
   return (
     <>
       <main className="flex flex-col">
@@ -20,26 +19,31 @@ const Home: NextPage<Props> = ({ posts, numPosts }) => {
           return <PostCard key={post.id} {...post} />;
         })}
       </main>
-      <Pagination numPage={numPage} />
+      <Pagination numPages={numPages} />
     </>
   );
 };
 
-export const getStaticPaths: GetStaticPaths = () => {
+export const getStaticPaths: GetStaticPaths = async () => {
+  const numPage = await getNumPages();
+  // range(0, numPage)
+  const paths = Array.from(Array(numPage), (_, n: number) => ({
+    params: { page: (n + 1).toString() },
+  }));
   return {
-    paths: [{ params: { page: "1" } }, { params: { page: "2" } }],
-    fallback: "blocking",
+    paths,
+    fallback: false,
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
   const page = params?.page as string;
   const posts = await getPosts(page);
-  const numPosts = await getNumPosts();
+  const numPages = await getNumPages();
   return {
     props: {
       posts,
-      numPosts,
+      numPages,
     },
   };
 };

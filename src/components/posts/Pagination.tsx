@@ -3,10 +3,10 @@ import React from "react";
 import ReactPaginate, { type ReactPaginateProps } from "react-paginate";
 
 interface PaginationProps {
-  numPage: number;
+  numPages: number;
 }
 
-const Pagination: React.FC<PaginationProps> = ({ numPage }) => {
+const Pagination: React.FC<PaginationProps> = ({ numPages }) => {
   const currentPage = parseInt(useRouter().query.page as string);
   const handlePageClick: ReactPaginateProps["onPageChange"] = (e) => {
     console.log(e);
@@ -24,7 +24,7 @@ const Pagination: React.FC<PaginationProps> = ({ numPage }) => {
       previousLinkClassName="grid h-[2em] w-[2em] place-items-center rounded-md hover:bg-slate-200"
       nextLinkClassName="grid h-[2em] w-[2em] place-items-center rounded-md hover:bg-slate-200"
       disabledClassName="hidden"
-      pageCount={numPage}
+      pageCount={numPages}
       forcePage={currentPage - 1}
       marginPagesDisplayed={2}
       pageRangeDisplayed={1}
