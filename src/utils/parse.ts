@@ -19,6 +19,9 @@ export const removePrefix = (content: string, prefix: string) => {
   return content.replace(prefix, "").trim();
 };
 
+export const getPostId = (href: string) =>
+  parseInt(href.substring(href.lastIndexOf("/") + 1).split(".")[0]!);
+
 export const getPostMeta = (post: HTMLElement) => {
   const meta = post.querySelector(".post-meta-left")!;
   const metaChildren = meta.childNodes;
@@ -42,9 +45,7 @@ export const getRelatedPosts = (element: HTMLElement): RelatedPost[] => {
   const anchors = element.querySelectorAll("a");
   return anchors.map((anchor) => {
     const originalHref = anchor.attributes.href!;
-    const postId = parseInt(
-      originalHref.substring(originalHref.lastIndexOf("/") + 1).split(".")[0]!
-    );
+    const postId = getPostId(originalHref);
     return {
       id: postId,
       title: anchor.innerText,

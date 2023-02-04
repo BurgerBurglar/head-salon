@@ -6,6 +6,7 @@ import { type Post, type PostSummary } from "../types";
 import {
   cleanHtml,
   getIdFromUrl,
+  getPostId,
   getPostMeta,
   getRelatedPosts,
   removeFiller,
@@ -75,10 +76,25 @@ export const getPost = async (id: number): Promise<Post> => {
   const title = soup.querySelector(".post-title")!.text;
 
   const bodySoup = soup.querySelector(".post-entry")!;
+
   const relatedPostTitleSoup = bodySoup.querySelector(".related_post_title")!;
   const relatedPostSoup = bodySoup.querySelector(".related_post")!;
   relatedPostTitleSoup.remove();
   relatedPostSoup.remove();
+
+  const anchors = bodySoup.querySelectorAll("a");
+  // update all post URLs to this site
+  anchors
+    .filter((anchor) =>
+      anchor.getAttribute("href")?.includes("https://headsalon.org/archives/")
+    )
+    .forEach((anchor) => {
+      const href = anchor.getAttribute("href");
+      if (!href) return;
+      const postId = getPostId(href);
+      anchor.setAttribute("href", `/posts/${postId}`);
+    });
+
   const body = bodySoup.innerHTML;
 
   const { date, numRead, category } = getPostMeta(soup);
