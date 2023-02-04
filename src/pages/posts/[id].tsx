@@ -1,7 +1,10 @@
+import { Link } from "lucide-react";
 import { type GetServerSideProps, type NextPage } from "next";
 import PostMeta from "../../components/posts/PostMeta";
+import { CopyTooltipContent, TooltipWrapper } from "../../components/Tooltip";
 import { getPost } from "../../scraper/fetch";
 import { type Post } from "../../types";
+import { handleCopy } from "../../utils/misc";
 
 const Post: NextPage<Post> = ({
   title,
@@ -13,7 +16,15 @@ const Post: NextPage<Post> = ({
 }) => {
   return (
     <main className="article">
-      <h2>{title}</h2>
+      <TooltipWrapper side="right" content={<CopyTooltipContent />}>
+        <div
+          className="flex cursor-pointer items-center gap-2 text-pink-500 hover:underline"
+          onClick={() => handleCopy(window.location.href)}
+        >
+          <h2>{title}</h2>
+          <Link />
+        </div>
+      </TooltipWrapper>
       <PostMeta date={date} numRead={numRead} category={category} />
       <article dangerouslySetInnerHTML={{ __html: body }} />
       <h3 className="">相关文章</h3>
