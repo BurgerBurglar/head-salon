@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import axios from "axios";
 import { parse } from "node-html-parser";
-import { SHOULD_USE_TEST_DATA } from "../constants";
 import { type Post, type PostSummary } from "../types";
 import {
   cleanHtml,
@@ -12,20 +11,14 @@ import {
   removeFiller,
   removePrefix,
 } from "../utils/parse";
-import { frontPageHtml, postHtml } from "./test";
 
 const axiosInstance = axios.create({
   baseURL: "https://headsalon.org/",
 });
 
 export const getPosts = async (page: number) => {
-  let html: string;
-  if (SHOULD_USE_TEST_DATA) {
-    html = await new Promise<string>((res) => res(frontPageHtml));
-  } else {
-    const result = await axiosInstance.get<string>(`/page/${page}`);
-    html = result.data;
-  }
+  const result = await axiosInstance.get<string>(`/page/${page}`);
+  const html = result.data;
   const soup = parse(cleanHtml(html));
   const posts = soup.querySelectorAll(".post");
 
@@ -65,13 +58,9 @@ export const getNumPosts = async () => {
 };
 
 export const getPost = async (id: number): Promise<Post> => {
-  let html: string;
-  if (SHOULD_USE_TEST_DATA) {
-    html = await new Promise<string>((res) => res(postHtml as string));
-  } else {
-    const result = await axiosInstance.get<string>(`/archives/${id}.html`);
-    html = result.data;
-  }
+  const result = await axiosInstance.get<string>(`/archives/${id}.html`);
+  const html = result.data;
+
   const soup = parse(html);
   const title = soup.querySelector(".post-title")!.text;
 
