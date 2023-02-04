@@ -24,20 +24,23 @@ const Home: NextPage<Props> = ({ posts, numPages }) => {
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const numPage = await getNumPages();
-  // range(0, numPage)
-  const paths = Array.from(Array(numPage), (_, n: number) => ({
+export const getStaticPaths: GetStaticPaths = () => {
+  const paths = [1, 2, 3].map((n) => ({
     params: { page: (n + 1).toString() },
   }));
   return {
     paths,
-    fallback: false,
+    fallback: "blocking",
   };
 };
 
 export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
+  const numPage = await getNumPages();
   const page = parseInt(params?.page as string);
+  if (page > numPage)
+    return {
+      notFound: true,
+    };
   const posts = await getPosts(page);
   const numPages = await getNumPages();
   return {
