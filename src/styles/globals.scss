@@ -32,11 +32,13 @@ html {
   }
   p {
     @apply my-4;
-    a {
-      @apply text-sm;
-    }
   }
   a {
     @apply text-pink-500 hover:underline;
+
+    // references like [1]
+    &[name] {
+      @apply text-sm;
+    }
   }
 }
