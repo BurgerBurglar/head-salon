@@ -62,6 +62,8 @@ export const getPost = async (id: number): Promise<Post> => {
   const soup = parse(html);
   const title = soup.querySelector(".post-title")!.text;
 
+  const { date, numRead, category } = getPostMeta(soup);
+
   const bodySoup = soup.querySelector(".post-entry")!;
 
   const relatedPostTitleSoup = bodySoup.querySelector(".related_post_title")!;
@@ -84,14 +86,12 @@ export const getPost = async (id: number): Promise<Post> => {
 
   const body = bodySoup.innerHTML;
 
-  const { date, numRead, category } = getPostMeta(soup);
-
-  const relatedPost = getRelatedPosts(relatedPostSoup);
+  const relatedPosts = getRelatedPosts(relatedPostSoup);
 
   return {
     title,
     body,
-    relatedPost,
+    relatedPosts,
     date,
     numRead,
     category,

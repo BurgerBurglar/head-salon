@@ -10,7 +10,7 @@ import { handleCopy } from "../../utils/misc";
 const Post: NextPage<Post> = ({
   title,
   body,
-  relatedPost,
+  relatedPosts,
   date,
   numRead,
   category,
@@ -34,7 +34,7 @@ const Post: NextPage<Post> = ({
         <article dangerouslySetInnerHTML={{ __html: body }} />
         <h3 className="">相关文章</h3>
         <section>
-          {relatedPost.map(({ id, title }) => (
+          {relatedPosts.map(({ id, title }) => (
             <div key={id} className="my-2">
               <a href={`/posts/${id}`}>{title}</a>
             </div>
@@ -48,14 +48,14 @@ export const getServerSideProps: GetServerSideProps<Post> = async ({
   params,
 }) => {
   const id = parseInt(params?.id as string);
-  const { title, body, relatedPost, date, numRead, category } = await getPost(
+  const { title, body, relatedPosts, date, numRead, category } = await getPost(
     id
   );
   return {
     props: {
       title,
       body,
-      relatedPost,
+      relatedPosts,
       date,
       numRead,
       category,

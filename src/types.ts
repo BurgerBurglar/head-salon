@@ -15,7 +15,7 @@ export interface RelatedPost {
 export interface Post {
   title: string;
   body: string;
-  relatedPost: RelatedPost[];
+  relatedPosts: RelatedPost[];
   date: string;
   numRead: number;
   category: string;
