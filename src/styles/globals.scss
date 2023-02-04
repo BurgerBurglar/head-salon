@@ -11,12 +11,12 @@ html {
 }
 
 .article {
-  @apply text-justify leading-relaxed;
+  @apply break-words leading-relaxed;
   h2,
   h3,
   h4,
   h5 {
-    @apply font-bold text-pink-500;
+    @apply text-start font-bold text-pink-500;
   }
   h2 {
     @apply my-3 text-2xl;
