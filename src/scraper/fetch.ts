@@ -5,12 +5,10 @@ import { type Post, type PostSummary } from "../types";
 import {
   cleanHtml,
   getIdFromUrl,
-  getPostId,
-  getPostMeta,
-  getRelatedPosts,
   removeFiller,
   removePrefix,
 } from "../utils/parse";
+import { getPostId, getPostMeta, getRelatedPosts } from "../utils/posts";
 
 const axiosInstance = axios.create({
   baseURL: "https://headsalon.org/",
