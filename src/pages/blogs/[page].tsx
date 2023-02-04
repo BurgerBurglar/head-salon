@@ -37,7 +37,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
-  const page = params?.page as string;
+  const page = parseInt(params?.page as string);
   const posts = await getPosts(page);
   const numPages = await getNumPages();
   return {

@@ -2,20 +2,22 @@
 import axios from "axios";
 import { parse } from "node-html-parser";
 import { SHOULD_USE_TEST_DATA } from "../constants";
-import { type PostSummary } from "../types";
+import { type Post, type PostSummary } from "../types";
 import {
   cleanHtml,
   getIdFromUrl,
+  getPostMeta,
+  getRelatedPosts,
   removeFiller,
   removePrefix,
 } from "../utils/parse";
-import { frontPageHtml } from "./test";
+import { frontPageHtml, postHtml } from "./test";
 
 const axiosInstance = axios.create({
   baseURL: "https://headsalon.org/",
 });
 
-export const getPosts = async (page: string) => {
+export const getPosts = async (page: number) => {
   let html: string;
   if (SHOULD_USE_TEST_DATA) {
     html = await new Promise<string>((res) => res(frontPageHtml));
@@ -33,16 +35,7 @@ export const getPosts = async (page: string) => {
 
     const title = post.querySelector(".post-title")!.text.trim();
 
-    const meta = post.querySelector(".post-meta-left")!;
-    const metaChildren = meta.childNodes;
-
-    const dateTimeString = metaChildren[3]!.text.substring(3, 19);
-    const date = new Date(dateTimeString);
-
-    const numReadString = metaChildren[5]!.text.split("(")[1]!.split(")")[0]!;
-    const numRead = parseInt(numReadString.replaceAll(",", ""));
-
-    const category = post.querySelector('[rel="category tag"]')!.text;
+    const { date, numRead, category } = getPostMeta(post);
 
     const postEntry = post.querySelector(".post-entry")!.text.trim();
     const contentWithoutFiller = removeFiller(postEntry.substring(0, 200));
@@ -52,7 +45,7 @@ export const getPosts = async (page: string) => {
     return {
       id,
       title,
-      date: date.toLocaleDateString(),
+      date,
       numRead,
       abstract,
       category,
@@ -68,4 +61,36 @@ export const getNumPosts = async () => {
   );
   const numPosts = parseInt(result.data);
   return numPosts;
+};
+
+export const getPost = async (id: number): Promise<Post> => {
+  let html: string;
+  if (SHOULD_USE_TEST_DATA) {
+    html = await new Promise<string>((res) => res(postHtml as string));
+  } else {
+    const result = await axiosInstance.get<string>(`/archives/${id}.html`);
+    html = result.data;
+  }
+  const soup = parse(html);
+  const title = soup.querySelector(".post-title")!.text;
+
+  const bodySoup = soup.querySelector(".post-entry")!;
+  const relatedPostTitleSoup = bodySoup.querySelector(".related_post_title")!;
+  const relatedPostSoup = bodySoup.querySelector(".related_post")!;
+  relatedPostTitleSoup.remove();
+  relatedPostSoup.remove();
+  const body = bodySoup.innerHTML;
+
+  const { date, numRead, category } = getPostMeta(soup);
+
+  const relatedPost = getRelatedPosts(relatedPostSoup);
+
+  return {
+    title,
+    body,
+    relatedPost,
+    date,
+    numRead,
+    category,
+  };
 };
