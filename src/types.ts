@@ -12,6 +12,13 @@ export interface RelatedPost {
   title: string;
 }
 
+export interface Comment {
+  id: number;
+  username: string;
+  date: string;
+  content: string;
+}
+
 export interface Post {
   title: string;
   body: string;
@@ -19,4 +26,5 @@ export interface Post {
   date: string;
   numRead: number;
   category: string;
+  comments: Comment[];
 }

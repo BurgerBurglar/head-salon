@@ -8,7 +8,12 @@ import {
   removeFiller,
   removePrefix,
 } from "../utils/parse";
-import { getPostId, getPostMeta, getRelatedPosts } from "../utils/posts";
+import {
+  getComments,
+  getPostId,
+  getPostMeta,
+  getRelatedPosts,
+} from "../utils/posts";
 
 const axiosInstance = axios.create({
   baseURL: "https://headsalon.org/",
@@ -88,6 +93,8 @@ export const getPost = async (id: number): Promise<Post> => {
 
   const relatedPosts = getRelatedPosts(relatedPostSoup);
 
+  const comments = getComments(soup);
+
   return {
     title,
     body,
@@ -95,5 +102,6 @@ export const getPost = async (id: number): Promise<Post> => {
     date,
     numRead,
     category,
+    comments,
   };
 };
