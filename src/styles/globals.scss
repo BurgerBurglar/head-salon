@@ -11,7 +11,7 @@ html {
 }
 
 .article {
-  @apply break-words leading-relaxed;
+  @apply break-words text-justify leading-relaxed;
   h2,
   h3,
   h4,
@@ -40,5 +40,8 @@ html {
     &[name] {
       @apply text-sm;
     }
+  }
+  table {
+    @apply max-w-full;
   }
 }
