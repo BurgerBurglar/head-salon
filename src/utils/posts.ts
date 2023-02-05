@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
 import { type HTMLElement } from "node-html-parser";
-import { type Comment, type RelatedPost } from "../types";
+import { type Reply, type Comment, type RelatedPost } from "../types";
 
 export const getPostId = (href: string) =>
   parseInt(href.substring(href.lastIndexOf("/") + 1).split(".")[0]!);
@@ -37,6 +37,22 @@ export const getRelatedPosts = (post: HTMLElement): RelatedPost[] => {
   });
 };
 
+const getReplies = (comment: HTMLElement): Reply[] => {
+  const repliesSoup = comment.querySelectorAll(".comment-childs");
+  const replies = repliesSoup.map((reply) => {
+    const id = parseInt(reply.id.split("-")[1]!);
+    const username = reply.querySelector("p>cite")!.text;
+    const dateText = comment.querySelector(".commentmetadata")!.text;
+    const [month, day, year] = dateText.match(/\d+/g)!;
+    const date = new Date(
+      Date.parse(`${year!}-${month}-${day!}`)
+    ).toLocaleDateString();
+    const content = reply.querySelector("p:nth-of-type(2)")!.text;
+    return { id, username, date, content };
+  });
+  return replies;
+};
+
 export const getComments = (post: HTMLElement): Comment[] => {
   const commentsSection = post.getElementById("comments");
   const commentsSoup = commentsSection.querySelectorAll(".commentlist li");
@@ -47,7 +63,10 @@ export const getComments = (post: HTMLElement): Comment[] => {
     const dateSoup = comment.querySelector("h4 a[title]")!;
     const date = new Date(dateSoup.text).toLocaleDateString();
     const content = comment.querySelector("h4+p")!.text;
-    return { id, username, date, content };
+
+    const replies = getReplies(comment);
+
+    return { id, username, date, content, replies };
   });
 
   return comments;

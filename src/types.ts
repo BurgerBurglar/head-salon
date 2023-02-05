@@ -12,11 +12,19 @@ export interface RelatedPost {
   title: string;
 }
 
+export interface Reply {
+  id: number;
+  username: string;
+  date: string;
+  content: string;
+}
+
 export interface Comment {
   id: number;
   username: string;
   date: string;
   content: string;
+  replies: Reply[];
 }
 
 export interface Post {
