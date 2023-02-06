@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "lucide-react";
-import { type GetServerSideProps, type NextPage } from "next";
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
+import type { ParsedUrlQuery } from "querystring";
 import Comment from "../../components/posts/Comment";
 import PostMeta from "../../components/posts/PostMeta";
 import { CopyTooltipContent, TooltipWrapper } from "../../components/Tooltip";
@@ -18,12 +19,11 @@ const Post: NextPage<Post> = ({
   numRead,
   category,
 }) => {
-  console.log({ id });
   const comments = useQuery({
     queryKey: [id, "comments"],
     queryFn: () => fetchCommentsInFront(id),
   });
-  const hasComments = !!comments.data && comments.data.length !== 0;
+
   return (
     <>
       <Head>
@@ -49,23 +49,30 @@ const Post: NextPage<Post> = ({
             </div>
           ))}
         </section>
-        {hasComments && (
-          <section className="mt-10">
-            <h3>评论</h3>
+        <section className="mt-10">
+          <h3>{comments.data?.length ? "评论" : "暂无评论"}</h3>
+          {!!comments.data?.length && (
             <div className="mt-4 flex flex-col gap-5">
               {comments.data.map((comment) => (
                 <Comment key={comment.id} {...comment} />
               ))}
             </div>
-          </section>
-        )}
+          )}
+        </section>
       </main>
     </>
   );
 };
-export const getServerSideProps: GetServerSideProps<Post> = async ({
-  params,
-}) => {
+
+export const getStaticPaths: GetStaticPaths = () => {
+  const paths: { params: ParsedUrlQuery }[] = [];
+  return {
+    paths,
+    fallback: "blocking",
+  };
+};
+
+export const getStaticProps: GetStaticProps<Post> = async ({ params }) => {
   const id = parseInt(params?.id as string);
   const post = await getPost(id);
   return {
