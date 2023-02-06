@@ -30,15 +30,16 @@ const Post: NextPage<Post> = ({
         <title>{title} - 海德沙龙</title>
       </Head>
       <main className="article">
-        <TooltipWrapper side="right" content={<CopyTooltipContent />}>
-          <div
-            className="flex cursor-pointer items-center gap-2 text-pink-500 hover:underline"
-            onClick={() => handleCopy(window.location.href)}
-          >
-            <h2>{title}</h2>
-            <Link />
-          </div>
-        </TooltipWrapper>
+        <div className="flex items-center gap-2 ">
+          <h2>{title}</h2>
+          <TooltipWrapper side="right" content={<CopyTooltipContent />}>
+            <Link
+              className="cursor-pointer text-pink-500 hover:underline"
+              aria-label="copy link"
+              onClick={() => handleCopy(window.location.href)}
+            />
+          </TooltipWrapper>
+        </div>
         <PostMeta date={date} numRead={numRead} category={category} />
         <article dangerouslySetInnerHTML={{ __html: body }} />
         <h3>相关文章</h3>
