@@ -1,19 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import axios from "axios";
 import { parse } from "node-html-parser";
-import { type Post, type PostSummary } from "../types";
-import {
-  cleanHtml,
-  getIdFromUrl,
-  removeFiller,
-  removePrefix,
-} from "../utils/parse";
-import {
-  getComments,
-  getPostId,
-  getPostMeta,
-  getRelatedPosts,
-} from "../utils/posts";
+import { type Comment, type Post, type PostSummary } from "../types";
+import { parseComments, parsePost, parsePostSummary } from "../utils/parseHtml";
+import { cleanHtml } from "../utils/string";
 
 const axiosInstance = axios.create({
   baseURL: "https://headsalon.org/",
@@ -24,30 +14,7 @@ export const getPosts = async (page: number) => {
   const html = result.data;
   const soup = parse(cleanHtml(html));
   const posts = soup.querySelectorAll(".post");
-
-  const postAbstract: PostSummary[] = posts.map((post) => {
-    const url = post.querySelector(".post-title")!.querySelector("a")!
-      .attributes["href"]!;
-    const id = getIdFromUrl(url);
-
-    const title = post.querySelector(".post-title")!.text.trim();
-
-    const { date, numRead, category } = getPostMeta(post);
-
-    const postEntry = post.querySelector(".post-entry")!.text.trim();
-    const contentWithoutFiller = removeFiller(postEntry.substring(0, 200));
-    const contentWithoutTitle = removePrefix(contentWithoutFiller, title);
-    const abstract = removePrefix(contentWithoutTitle, "辉格");
-
-    return {
-      id,
-      title,
-      date,
-      numRead,
-      abstract,
-      category,
-    };
-  });
+  const postAbstract: PostSummary[] = posts.map(parsePostSummary);
   // remove top post because who cares
   return postAbstract.filter(({ id }) => id !== 1);
 };
@@ -60,48 +27,23 @@ export const getNumPosts = async () => {
   return numPosts;
 };
 
+// run on build time
 export const getPost = async (id: number): Promise<Post> => {
   const result = await axiosInstance.get<string>(`/archives/${id}.html`);
   const html = result.data;
-
   const soup = parse(html);
-  const title = soup.querySelector(".post-title")!.text;
+  return parsePost(soup);
+};
 
-  const { date, numRead, category } = getPostMeta(soup);
+// run on request time
+export const getComments = async (id: number): Promise<Comment[]> => {
+  const result = await axiosInstance.get<string>(`/archives/${id}.html`);
+  const html = result.data;
+  const soup = parse(html);
+  return parseComments(soup);
+};
 
-  const bodySoup = soup.querySelector(".post-entry")!;
-
-  const relatedPostTitleSoup = bodySoup.querySelector(".related_post_title")!;
-  const relatedPostSoup = bodySoup.querySelector(".related_post")!;
-  relatedPostTitleSoup.remove();
-  relatedPostSoup.remove();
-
-  const anchors = bodySoup.querySelectorAll("a");
-  // update all post URLs to this site
-  anchors
-    .filter((anchor) =>
-      anchor.getAttribute("href")?.includes("https://headsalon.org/archives/")
-    )
-    .forEach((anchor) => {
-      const href = anchor.getAttribute("href");
-      if (!href) return;
-      const postId = getPostId(href);
-      anchor.setAttribute("href", `/posts/${postId}`);
-    });
-
-  const body = bodySoup.innerHTML;
-
-  const relatedPosts = getRelatedPosts(relatedPostSoup);
-
-  const comments = getComments(soup);
-
-  return {
-    title,
-    body,
-    relatedPosts,
-    date,
-    numRead,
-    category,
-    comments,
-  };
+export const fetchCommentsInFront = async (id: number) => {
+  const result = await axios.get<Comment[]>(`/api/posts/${id}/comments`);
+  return result.data;
 };

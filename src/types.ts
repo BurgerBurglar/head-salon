@@ -28,11 +28,11 @@ export interface Comment {
 }
 
 export interface Post {
+  id: number;
   title: string;
   body: string;
   relatedPosts: RelatedPost[];
   date: string;
   numRead: number;
   category: string;
-  comments: Comment[];
 }

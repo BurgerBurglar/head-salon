@@ -1,22 +1,29 @@
+import { useQuery } from "@tanstack/react-query";
 import { Link } from "lucide-react";
 import { type GetServerSideProps, type NextPage } from "next";
 import Head from "next/head";
 import Comment from "../../components/posts/Comment";
 import PostMeta from "../../components/posts/PostMeta";
 import { CopyTooltipContent, TooltipWrapper } from "../../components/Tooltip";
-import { getPost } from "../../scraper/fetch";
+import { fetchCommentsInFront, getPost } from "../../scraper/fetch";
 import { type Post } from "../../types";
 import { handleCopy } from "../../utils/misc";
 
 const Post: NextPage<Post> = ({
+  id,
   title,
   body,
   relatedPosts,
   date,
   numRead,
   category,
-  comments,
 }) => {
+  console.log({ id });
+  const comments = useQuery({
+    queryKey: [id, "comments"],
+    queryFn: () => fetchCommentsInFront(id),
+  });
+  const hasComments = !!comments.data && comments.data.length !== 0;
   return (
     <>
       <Head>
@@ -42,14 +49,16 @@ const Post: NextPage<Post> = ({
             </div>
           ))}
         </section>
-        <section className="mt-10">
-          <h3>评论</h3>
-          <div className="mt-4 flex flex-col gap-5">
-            {comments.map((comment) => (
-              <Comment key={comment.id} {...comment} />
-            ))}
-          </div>
-        </section>
+        {hasComments && (
+          <section className="mt-10">
+            <h3>评论</h3>
+            <div className="mt-4 flex flex-col gap-5">
+              {comments.data.map((comment) => (
+                <Comment key={comment.id} {...comment} />
+              ))}
+            </div>
+          </section>
+        )}
       </main>
     </>
   );
