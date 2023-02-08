@@ -9,7 +9,6 @@ interface PaginationProps {
 const Pagination: React.FC<PaginationProps> = ({ numPages }) => {
   const currentPage = parseInt(useRouter().query.page as string);
   const handlePageClick: ReactPaginateProps["onPageChange"] = (e) => {
-    console.log(e);
     window.location.href = `/blogs/${e.selected + 1}`;
   };
   const handleActivePageClick: ReactPaginateProps["onPageActive"] = () => {

@@ -15,7 +15,7 @@ const BookSummary: React.FC<BookSummary> = ({
   const stars = getStars(doubanRating);
 
   return (
-    <div className="flex items-center justify-center gap-2">
+    <div className="flex items-center justify-center gap-2 border border-slate-200 px-2">
       <Image src={coverPhoto} alt={title} width={100} height={141} />
       <div className="flex-1">
         <h3 className="text-start text-lg font-bold">{title}</h3>
