@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
 import { type HTMLElement } from "node-html-parser";
+import type { Reply, Comment, RelatedPost, Post, BookReview } from "../types";
 import {
-  type Reply,
-  type Comment,
-  type RelatedPost,
-  type Post,
-} from "../types";
-import { getPostId, removeFiller, removePrefix } from "./string";
+  getDoubanRating,
+  getPostId,
+  removeFiller,
+  removePrefix,
+} from "./string";
 
 export const parsePostSummary = (post: HTMLElement) => {
   const url = post.querySelector(".post-title")!.querySelector("a")!.attributes[
@@ -141,4 +141,19 @@ export const parseComments = (post: HTMLElement): Comment[] => {
   });
 
   return comments;
+};
+
+export const parseBookReviews = (book: HTMLElement): BookReview => {
+  const id = parseInt(book.getAttribute("id") as string);
+  const image = book.querySelector(".subject-img>img")!;
+  const imgUrl = image.getAttribute("src")!;
+  const bookTitle = image.getAttribute("title")!;
+  const ratingClassName = book
+    .querySelector(".main-title-rating")
+    ?.getAttribute("class");
+  const rating = getDoubanRating(ratingClassName);
+  const title = book.querySelector("h2>a")!.text;
+  const summary = book.querySelector(".short-content")!.text.trim();
+
+  return { id, bookTitle, imgUrl, rating, title, summary };
 };

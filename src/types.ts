@@ -47,3 +47,14 @@ export interface BookSummary {
   publishYear: number;
   role: Role;
 }
+
+export interface BookReview {
+  id: number;
+  bookTitle: string;
+  imgUrl: string;
+  rating: number | undefined;
+  title: string;
+  summary: string;
+}
+
+export type RatingOutOf = 5 | 10;

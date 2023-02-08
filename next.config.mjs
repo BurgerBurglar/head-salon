@@ -14,14 +14,9 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
-  // async redirects() {
-  //   return [
-  //     {
-  //       source: "/",
-  //       destination: "/blogs/1",
-  //       permanent: true,
-  //     },
-  //   ];
-  // },
+  images: {
+    domains: ["doubanio.com"],
+    remotePatterns: [{ protocol: "https", hostname: "**.doubanio.com" }],
+  },
 };
 export default config;

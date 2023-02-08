@@ -1,8 +1,7 @@
-import { Star, StarHalf } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { BookSummary } from "../../types";
-import { getStars, range } from "../../utils/misc";
+import Stars from "../books/Stars";
 
 const BookSummary: React.FC<BookSummary> = ({
   title,
@@ -12,8 +11,6 @@ const BookSummary: React.FC<BookSummary> = ({
   publishYear,
   role,
 }) => {
-  const stars = getStars(doubanRating);
-
   return (
     <div className="flex items-center justify-center gap-2 border border-slate-200 px-2">
       <Image src={coverPhoto} alt={title} width={100} height={141} />
@@ -21,18 +18,7 @@ const BookSummary: React.FC<BookSummary> = ({
         <h3 className="text-start text-lg font-bold">{title}</h3>
         <div className="text-slate-600">{subtitle}</div>
         <div className="my-2 flex">
-          <span className="flex text-amber-500">
-            {range(stars.whole).map((n) => (
-              <Star key={n} className="w-4 fill-amber-500" />
-            ))}
-            {stars.hasHalf && <StarHalf className="w-4 fill-amber-500" />}
-            {range(stars.empty).map((n) => (
-              <Star
-                key={n + 10}
-                className="w-4 fill-slate-300 text-slate-300"
-              />
-            ))}
-          </span>
+          <Stars rating={doubanRating} outOf={10} />
           <span>{doubanRating}</span>
         </div>
         <div className="text-slate-500">

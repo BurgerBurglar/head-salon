@@ -1,12 +1,21 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import axios from "axios";
 import { parse } from "node-html-parser";
-import { type Comment, type Post, type PostSummary } from "../types";
-import { parseComments, parsePost, parsePostSummary } from "../utils/parseHtml";
+import type { BookReview, Comment, Post, PostSummary } from "../types";
+import {
+  parseBookReviews,
+  parseComments,
+  parsePost,
+  parsePostSummary,
+} from "../utils/parseHtml";
 import { cleanHtml } from "../utils/string";
 
 const axiosInstance = axios.create({
   baseURL: "https://headsalon.org/",
+});
+
+const doubanAxios = axios.create({
+  baseURL: "https://www.douban.com/people/whigzhou",
 });
 
 export const getPosts = async (page: number) => {
@@ -45,5 +54,19 @@ export const getComments = async (id: number): Promise<Comment[]> => {
 
 export const fetchCommentsInFront = async (id: number) => {
   const result = await axios.get<Comment[]>(`/api/posts/${id}/comments`);
+  return result.data;
+};
+
+export const fetchBookReviews = async (page?: number, limit?: number) => {
+  const result = await doubanAxios.get<string>("/reviews");
+  const html = result.data;
+  const soup = parse(html);
+  const booksSoup = soup.querySelectorAll(".main.review-item");
+  const bookReviews = booksSoup.map(parseBookReviews);
+  return bookReviews.slice(0, limit);
+};
+
+export const fetchBookReviewsInFront = async (page: number) => {
+  const result = await axios.get<BookReview[]>(`/api/bookReviews/${page}`);
   return result.data;
 };

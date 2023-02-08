@@ -16,3 +16,11 @@ export const removePrefix = (content: string, prefix: string) => {
   if (!content.startsWith(prefix)) return content;
   return content.replace(prefix, "").trim();
 };
+
+export const getDoubanRating = (className?: string) => {
+  if (className === undefined) return;
+  // example: 40 | 35
+  const starString = className.split(" ")[0]!.replace("allstar", "");
+  const rating = parseInt(starString) / 10;
+  return rating;
+};
