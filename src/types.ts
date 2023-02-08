@@ -36,3 +36,14 @@ export interface Post {
   numRead: number;
   category: string;
 }
+
+export type Role = "作者" | "译者";
+
+export interface BookSummary {
+  title: string;
+  subtitle: string;
+  coverPhoto: string;
+  doubanRating: number;
+  publishYear: number;
+  role: Role;
+}
