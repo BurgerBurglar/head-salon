@@ -1,6 +1,7 @@
 import { type NextPage } from "next";
 import Link from "next/link";
 import useBookReviews from "../../public/hooks/useBookReviews";
+import BlogSection from "../components/BlogSection";
 import BookReviewSection from "../components/books/BookReviewSection";
 import BookSummary from "../components/index/BookSummary";
 import { PUBLISHED_BOOKS } from "../constants";
@@ -16,6 +17,21 @@ const Home: NextPage = () => {
         {PUBLISHED_BOOKS.map((book) => (
           <BookSummary key={book.title} {...book} />
         ))}
+      </div>
+
+      <h2 className="my-4 text-start text-xl font-bold text-pink-600">
+        最新博文
+      </h2>
+      <BlogSection />
+      <div className="flex justify-center">
+        <Link
+          href="/blogs/1"
+          className="mt-5 rounded-lg border border-pink-600 px-3 py-1 text-pink-600
+          hover:bg-pink-50 active:bg-pink-100
+          "
+        >
+          查看全部
+        </Link>
       </div>
       <h2 className="my-4 text-start text-xl font-bold text-pink-600">
         辉格的书评

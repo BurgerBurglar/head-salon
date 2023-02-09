@@ -29,6 +29,11 @@ export const getPosts = async (page: number) => {
   return postAbstract.filter(({ id }) => id !== 1);
 };
 
+export const fetchPostsInFront = async (page: number) => {
+  const result = await axios.get<PostSummary[]>(`/api/blogs/${page}`);
+  return result.data;
+};
+
 export const getNumPosts = async () => {
   const result = await headAxios.get<string>(
     "/wordpress/wp-content/themes/Salon/catalog-ajax.php?q=count&filter=true"
