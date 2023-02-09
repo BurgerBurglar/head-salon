@@ -10,6 +10,11 @@ interface Props {
 const Search: NextPage<Props> = ({ posts }) => {
   return (
     <main className="flex flex-col">
+      {posts.length === 0 && (
+        <div className="mt-2 text-center text-xl font-bold text-pink-600">
+          暂无结果
+        </div>
+      )}
       {posts.map((post) => {
         return <PostCard key={post.id} {...post} />;
       })}
