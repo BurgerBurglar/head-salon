@@ -20,7 +20,7 @@ const Pagination: React.FC<PaginationProps> = ({
     <ReactPaginate
       className="mx-auto mt-8 flex w-fit gap-2 font-bold text-slate-600"
       pageLinkClassName="grid h-[2em] w-[2em] place-items-center rounded-md hover:bg-slate-200"
-      activeLinkClassName="bg-pink-500 text-white hover:bg-pink-500"
+      activeLinkClassName="bg-pink-600 text-white hover:bg-pink-600"
       previousLinkClassName="grid h-[2em] w-[2em] place-items-center rounded-md hover:bg-slate-200"
       nextLinkClassName="grid h-[2em] w-[2em] place-items-center rounded-md hover:bg-slate-200"
       disabledClassName="hidden"

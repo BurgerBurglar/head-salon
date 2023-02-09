@@ -12,11 +12,10 @@ const PostCard: React.FC<PostSummary> = ({
 }) => {
   return (
     <div className="my-4">
-      <h2
-        className="text-lg font-bold text-pink-500
-      hover:text-pink-600 hover:underline"
-      >
-        <a href={`/blogs/post/${id}`}>{title}</a>
+      <h2 className="text-lg font-bold text-pink-600">
+        <a className="hover:underline" href={`/blogs/post/${id}`}>
+          {title}
+        </a>
       </h2>
       <PostMeta date={date} numRead={numRead} category={category} />
       <div className="line-clamp-2">{abstract}</div>
