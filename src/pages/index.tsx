@@ -20,7 +20,7 @@ const Home: NextPage = () => {
       <h2 className="my-4 text-start text-xl font-bold text-pink-500">
         辉格的书评
       </h2>
-      {bookReviews.data && <BookReviewSection bookReviews={bookReviews.data} />}
+      <BookReviewSection bookReviews={bookReviews.data ?? []} />
       <div className="flex justify-center">
         <Link
           href="/reviews/1"

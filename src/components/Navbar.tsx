@@ -20,7 +20,7 @@ const Navbar: React.FC = () => {
   const isBlog = pathname.includes("/blogs/");
   const isReview = pathname.includes("/reviews");
   return (
-    <nav className="z-100 fixed w-full bg-amber-100">
+    <nav className="fixed z-50 w-full bg-amber-100">
       <div className="mx-auto flex max-w-3xl items-center justify-between px-2">
         <div className="flex items-center gap-3 py-2">
           <Link className="flex-shrink-0" href="/">
