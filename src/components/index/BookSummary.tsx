@@ -20,8 +20,7 @@ const BookSummary: React.FC<BookSummary> = ({
       </Link>
       <div className="flex-1">
         <h3
-          className="text-start text-lg font-bold
-        hover:underline
+          className="text-start text-lg font-bold text-slate-800 hover:underline
         "
         >
           <Link href={buyAt}>{title}</Link>

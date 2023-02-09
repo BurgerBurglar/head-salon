@@ -27,10 +27,10 @@ const Navbar: React.FC = () => {
             <Image src="/favicon.ico" alt="logo" width={50} height={50} />
           </Link>
           <div>
-            <h1 className="text-xl font-bold hover:text-pink-700">
+            <h1 className="text-xl font-bold text-slate-800 hover:text-pink-700">
               <Link href="/">海德沙龙 (HeadSalon)</Link>
             </h1>
-            <div className="text-[clamp(0.7rem,4vw,1rem)]">
+            <div className="text-[clamp(0.7rem,4vw,1rem)] text-slate-600">
               A Salon for Heads, No Sofa for Ass
             </div>
           </div>
@@ -46,7 +46,7 @@ const Navbar: React.FC = () => {
               <li
                 key={path}
                 className={clsx(
-                  "relative top-1 box-border h-[2em] hover:text-pink-700",
+                  "relative top-1 box-border h-[2em] text-slate-800 hover:text-pink-700",
                   {
                     "border-b-4 border-pink-700": shouldUnderline,
                   }
@@ -91,7 +91,7 @@ const Navbar: React.FC = () => {
             {NAV_PATHS.map(({ path, name }) => (
               <li
                 key={path}
-                className={clsx("pb-1 hover:text-pink-700", {
+                className={clsx("pb-1 text-slate-800 hover:text-pink-700", {
                   "border-b-4 border-pink-700": path === pathname,
                 })}
               >
