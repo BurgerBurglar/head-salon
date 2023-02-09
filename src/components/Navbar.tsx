@@ -6,6 +6,7 @@ import React, { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import clsx from "clsx";
+import SearchButton from "./SearchButton";
 
 const NAV_PATHS = [
   { path: "/blogs/1", name: "博文" },
@@ -19,7 +20,7 @@ const Navbar: React.FC = () => {
   const isBlog = pathname.includes("/blogs/");
   const isReview = pathname.includes("/reviews");
   return (
-    <nav className="fixed z-50 w-full bg-amber-100">
+    <nav className="fixed z-50 w-full border-b border-slate-300 bg-slate-100">
       <div className="mx-auto flex max-w-3xl items-center justify-between px-2">
         <div className="flex items-center gap-3 py-2">
           <Link className="flex-shrink-0" href="/">
@@ -54,12 +55,15 @@ const Navbar: React.FC = () => {
               </li>
             );
           })}
+          <li>
+            <SearchButton />
+          </li>
         </ul>
         <Button
           variant="ghost"
           className="block 
-          hover:bg-yellow-200
-          focus:bg-yellow-200 focus:ring-yellow-200
+          hover:bg-slate-200
+          focus:bg-slate-200 focus:ring-pink-200
           sm:hidden"
           aria-label="menu"
           onClick={() => setIsMenuOpen((prev) => !prev)}
@@ -79,7 +83,7 @@ const Navbar: React.FC = () => {
           />
           <ul
             className="flex min-w-[10em] flex-col gap-4 
-      bg-amber-100 px-4 pt-10 text-center sm:hidden"
+      bg-slate-100 px-4 pt-10 text-center sm:hidden"
           >
             {NAV_PATHS.map(({ path, name }) => (
               <li
@@ -93,6 +97,9 @@ const Navbar: React.FC = () => {
                 </a>
               </li>
             ))}
+            <li>
+              <SearchButton />
+            </li>
           </ul>
         </div>
       )}
