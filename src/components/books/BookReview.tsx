@@ -27,7 +27,10 @@ const BookReview: React.FC<BookReview> = ({
       <div className="text-center text-sm text-slate-500 line-clamp-1">
         {bookTitle}
       </div>
-      <h3 className="text-md mt-2 text-center text-pink-500 line-clamp-2">
+      <h3
+        className="text-md mt-2 text-center text-pink-500 line-clamp-2
+      hover:underline"
+      >
         <Link href={url}>{title}</Link>
       </h3>
       {rating !== null && <Stars rating={rating} outOf={5} />}

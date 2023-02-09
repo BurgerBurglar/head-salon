@@ -7,12 +7,16 @@ const Footer: React.FC = () => {
       <div className="mx-auto flex max-w-2xl flex-wrap justify-center gap-x-6">
         <div>
           Copyright © 2005-2023{" "}
-          <Link href="https://headsalon.org">HeadSalon.org</Link>
+          <Link href="https://headsalon.org" className="hover:underline">
+            HeadSalon.org
+          </Link>
         </div>
         <div>All Rights Reserved</div>
         <div>
           Contact:{" "}
-          <Link href="mailto:HeadSalon@gmail.com">HeadSalon@gmail.com</Link>
+          <Link href="mailto:HeadSalon@gmail.com" className="hover:underline">
+            HeadSalon@gmail.com
+          </Link>
         </div>
         <div>
           Original author:{" "}
