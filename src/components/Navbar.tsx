@@ -36,7 +36,7 @@ const Navbar: React.FC = () => {
           </div>
         </div>
 
-        <ul className="mr-2 hidden gap-2 sm:flex">
+        <ul className="mr-2 hidden items-center gap-2 sm:flex">
           {NAV_PATHS.map(({ path, name }) => {
             const shouldUnderline =
               (isBlog && name === "博文") ||
@@ -45,9 +45,12 @@ const Navbar: React.FC = () => {
             return (
               <li
                 key={path}
-                className={clsx("hover:text-pink-700", {
-                  "border-b-4 border-pink-700 pb-1": shouldUnderline,
-                })}
+                className={clsx(
+                  "relative top-1 box-border h-[2em] hover:text-pink-700",
+                  {
+                    "border-b-4 border-pink-700": shouldUnderline,
+                  }
+                )}
               >
                 <a href={path} className="px-2">
                   {name}
