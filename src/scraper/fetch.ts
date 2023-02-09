@@ -7,6 +7,7 @@ import {
   parseComments,
   parsePost,
   parsePostSummary,
+  parseReviewArticle,
 } from "../utils/parseHtml";
 import { cleanHtml } from "../utils/string";
 
@@ -78,4 +79,13 @@ export const fetchBookReviews = async (page = 1, limit?: number) => {
 export const fetchBookReviewsInFront = async (page: number) => {
   const result = await axios.get<BookReview[]>(`/api/bookReviews/${page}`);
   return result.data;
+};
+
+export const fetchDoubanReviewArticle = async (id: number) => {
+  const result = await axios.get<string>(
+    `https://book.douban.com/review/${id}`
+  );
+  const html = result.data;
+  const soup = parse(html);
+  return parseReviewArticle(soup);
 };

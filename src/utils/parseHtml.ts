@@ -1,7 +1,14 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
 import { type HTMLElement } from "node-html-parser";
-import type { Reply, Comment, RelatedPost, Post, BookReview } from "../types";
+import type {
+  Reply,
+  Comment,
+  RelatedPost,
+  Post,
+  BookReview,
+  BookReviewArticle,
+} from "../types";
 import {
   getDoubanRating,
   getPostId,
@@ -161,4 +168,28 @@ export const parseBookReviews = (book: HTMLElement): BookReview => {
   const reviewId = blogUrlMatches?.length ? getPostId(blogUrlMatches[0]) : id;
 
   return { id, bookTitle, imgUrl, rating, title, isBlog, reviewId };
+};
+
+export const parseReviewArticle = (article: HTMLElement): BookReviewArticle => {
+  const id = parseInt(article.querySelector(".main")!.id);
+  const title = article.querySelector(".article>h1")!.text;
+  const bookTitle = article.querySelector(
+    ".article .main-hd>a:last-of-type"
+  )!.text;
+  const rating = getDoubanRating(
+    article.querySelector(".article .main-title-rating")?.classNames
+  );
+  const date = article
+    .querySelector(".article .main-meta")!
+    .getAttribute("content")!;
+  const body = article.querySelector(".article .review-content")!.innerHTML;
+
+  return {
+    id,
+    title,
+    bookTitle,
+    rating,
+    date,
+    body,
+  };
 };

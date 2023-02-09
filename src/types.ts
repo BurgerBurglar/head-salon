@@ -60,3 +60,12 @@ export interface BookReview {
 }
 
 export type RatingOutOf = 5 | 10;
+
+export interface BookReviewArticle {
+  id: number;
+  title: string;
+  rating?: number;
+  body: string;
+  date: string;
+  bookTitle: string;
+}
