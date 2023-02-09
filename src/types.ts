@@ -46,6 +46,7 @@ export interface BookSummary {
   doubanRating: number;
   publishYear: number;
   role: Role;
+  buyAt: string;
 }
 
 export interface BookReview {

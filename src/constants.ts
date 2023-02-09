@@ -12,6 +12,7 @@ export const PUBLISHED_BOOKS: BookSummary[] = [
     doubanRating: 8.3,
     publishYear: 2017,
     role: "作者",
+    buyAt: "https://item.jd.com/12088549.html",
   },
   {
     title: "沐猿而冠",
@@ -20,6 +21,7 @@ export const PUBLISHED_BOOKS: BookSummary[] = [
     doubanRating: 7.8,
     publishYear: 2015,
     role: "作者",
+    buyAt: "https://item.jd.com/11713977.html",
   },
   {
     title: "自由的进化",
@@ -28,6 +30,7 @@ export const PUBLISHED_BOOKS: BookSummary[] = [
     doubanRating: 8.1,
     publishYear: 2017,
     role: "作者",
+    buyAt: "https://item.jd.com/11412640.html",
   },
   {
     title: "自私的皮球",
@@ -36,5 +39,6 @@ export const PUBLISHED_BOOKS: BookSummary[] = [
     doubanRating: 8.4,
     publishYear: 2012,
     role: "作者",
+    buyAt: "https://item.jd.com/10962928.html",
   },
 ];
