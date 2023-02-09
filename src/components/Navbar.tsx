@@ -10,8 +10,6 @@ const NAV_PATHS = [
   { path: "/blogs/1", name: "博文" },
   { path: "/reviews/1", name: "书评" },
   { path: "/intro", name: "介绍" },
-  { path: "/author", name: "作者" },
-  { path: "/copyright", name: "版权" },
 ];
 
 const Navbar: React.FC = () => {

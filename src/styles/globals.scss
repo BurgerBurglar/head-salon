@@ -30,7 +30,8 @@ html {
   ol {
     @apply list-decimal pl-4;
   }
-  p {
+  p,
+  ul {
     @apply my-4;
   }
   a {
