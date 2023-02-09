@@ -5,7 +5,7 @@ import BookReviewSkeleton from "./BookReviewSkeleton";
 import { twMerge } from "tailwind-merge";
 
 interface Props {
-  bookReviews: BookReview[];
+  bookReviews?: BookReview[];
   className?: string;
 }
 
@@ -17,11 +17,10 @@ const BookReviewSection: React.FC<Props> = ({ bookReviews, className }) => {
         className
       )}
     >
-      {bookReviews.map((review) => (
+      {bookReviews?.map((review) => (
         <BookReview key={review.id} {...review} />
       ))}
-      {bookReviews.length === 0 &&
-        rangeFrom1(9).map((n) => <BookReviewSkeleton key={n} />)}
+      {!bookReviews && rangeFrom1(9).map((n) => <BookReviewSkeleton key={n} />)}
     </div>
   );
 };
