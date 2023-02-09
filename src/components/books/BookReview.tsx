@@ -13,7 +13,7 @@ const BookReview: React.FC<BookReview> = ({
   reviewId,
 }) => {
   const imgWidth = 150;
-  const url = isBlog ? `/posts/${reviewId}` : `/reviews/${reviewId}`;
+  const url = isBlog ? `/posts/${reviewId}` : `/reviews/article/${reviewId}`;
   return (
     <div className="flex flex-col items-center">
       <Image
@@ -30,7 +30,7 @@ const BookReview: React.FC<BookReview> = ({
       <h3 className="text-md mt-2 text-center text-pink-500 line-clamp-2">
         <Link href={url}>{title}</Link>
       </h3>
-      {rating !== undefined && <Stars rating={rating} outOf={5} />}
+      {rating !== null && <Stars rating={rating} outOf={5} />}
     </div>
   );
 };
