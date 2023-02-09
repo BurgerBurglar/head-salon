@@ -17,7 +17,7 @@ const NAV_PATHS = [
 const Navbar: React.FC = () => {
   const { asPath: pathname } = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const isBlog = pathname.includes("/blogs/") || pathname.includes("/posts/");
+  const isBlog = pathname.includes("/blogs/");
   const isReview = pathname.includes("/reviews");
   return (
     <nav className="z-100 fixed w-full bg-amber-100">

@@ -13,7 +13,9 @@ const BookReview: React.FC<BookReview> = ({
   reviewId,
 }) => {
   const imgWidth = 150;
-  const url = isBlog ? `/posts/${reviewId}` : `/reviews/article/${reviewId}`;
+  const url = isBlog
+    ? `/blogs/post/${reviewId}`
+    : `/reviews/article/${reviewId}`;
   return (
     <div className="flex flex-col items-center">
       <Image

@@ -3,12 +3,15 @@ import { Link } from "lucide-react";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import type { ParsedUrlQuery } from "querystring";
-import Comment from "../../components/posts/Comment";
-import PostMeta from "../../components/posts/PostMeta";
-import { CopyTooltipContent, TooltipWrapper } from "../../components/Tooltip";
-import { fetchCommentsInFront, getPost } from "../../scraper/fetch";
-import { type Post } from "../../types";
-import { handleCopy } from "../../utils/misc";
+import Comment from "../../../components/posts/Comment";
+import PostMeta from "../../../components/posts/PostMeta";
+import {
+  CopyTooltipContent,
+  TooltipWrapper,
+} from "../../../components/Tooltip";
+import { fetchCommentsInFront, getPost } from "../../../scraper/fetch";
+import { type Post } from "../../../types";
+import { handleCopy } from "../../../utils/misc";
 
 const Post: NextPage<Post> = ({
   id,
@@ -46,7 +49,7 @@ const Post: NextPage<Post> = ({
         <section>
           {relatedPosts.map(({ id, title }) => (
             <div key={id} className="my-2">
-              <a href={`/posts/${id}`}>{title}</a>
+              <a href={`/blogs/post/${id}`}>{title}</a>
             </div>
           ))}
         </section>

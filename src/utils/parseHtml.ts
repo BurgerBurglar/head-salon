@@ -90,7 +90,7 @@ export const parsePost = (post: HTMLElement): Post => {
       const href = anchor.getAttribute("href");
       if (!href) return;
       const postId = getPostId(href);
-      anchor.setAttribute("href", `/posts/${postId}`);
+      anchor.setAttribute("href", `blogs/post/${postId}`);
     });
 
   const body = bodySoup.innerHTML;
