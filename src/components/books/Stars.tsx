@@ -18,7 +18,7 @@ const Stars: React.FC<StarsProps> = ({ rating, outOf }) => {
       ))}
       {stars.hasHalf && <StarHalf className="w-4 fill-amber-500" />}
       {range(stars.empty).map((n) => (
-        <Star key={n + 10} className="w-4 fill-slate-300 text-slate-300" />
+        <Star key={n} className="w-4 fill-slate-300 text-slate-300" />
       ))}
     </span>
   );
