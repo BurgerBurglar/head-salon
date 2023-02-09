@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import clsx from "clsx";
 
 const NAV_PATHS = [
   { path: "/blogs/1", name: "博文" },
@@ -43,9 +44,9 @@ const Navbar: React.FC = () => {
             return (
               <li
                 key={path}
-                className={`
-              ${shouldUnderline ? "border-b-4 border-pink-700 pb-1" : ""}
-               hover:text-pink-700`}
+                className={clsx("hover:text-pink-700", {
+                  "border-b-4 border-pink-700 pb-1": shouldUnderline,
+                })}
               >
                 <a href={path} className="px-2">
                   {name}
@@ -83,10 +84,9 @@ const Navbar: React.FC = () => {
             {NAV_PATHS.map(({ path, name }) => (
               <li
                 key={path}
-                className={`
-            pb-1
-            ${path === pathname ? "border-b-4 border-pink-700" : ""}
-             hover:text-pink-700`}
+                className={clsx("pb-1 hover:text-pink-700", {
+                  "border-b-4 border-pink-700": path === pathname,
+                })}
               >
                 <a href={path} className="px-2">
                   {name}
