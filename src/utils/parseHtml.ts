@@ -151,7 +151,7 @@ export const parseBookReviews = (book: HTMLElement): BookReview => {
   const ratingClassName = book
     .querySelector(".main-title-rating")
     ?.getAttribute("class");
-  const rating = getDoubanRating(ratingClassName);
+  const rating = getDoubanRating(ratingClassName) ?? null;
   const title = book.querySelector("h2>a")!.text;
   const summary = book.querySelector(".short-content")!.text.trim();
 

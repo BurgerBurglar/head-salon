@@ -1,5 +1,5 @@
 import { type GetStaticPaths, type GetStaticProps, type NextPage } from "next";
-import Pagination from "../../components/posts/Pagination";
+import PostPagination from "../../components/posts/PostPagination";
 import PostCard from "../../components/posts/PostCard";
 import { getPosts } from "../../scraper/fetch";
 import { type PostSummary } from "../../types";
@@ -19,7 +19,7 @@ const Home: NextPage<Props> = ({ posts, numPages }) => {
           return <PostCard key={post.id} {...post} />;
         })}
       </main>
-      <Pagination numPages={numPages} />
+      <PostPagination numPages={numPages} />
     </>
   );
 };

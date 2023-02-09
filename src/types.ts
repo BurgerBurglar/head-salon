@@ -52,7 +52,7 @@ export interface BookReview {
   id: number;
   bookTitle: string;
   imgUrl: string;
-  rating?: number;
+  rating: number | null;
   title: string;
   isBlog: boolean;
   reviewId: number;

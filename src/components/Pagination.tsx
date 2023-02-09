@@ -1,16 +1,17 @@
-import { useRouter } from "next/router";
 import React from "react";
 import ReactPaginate, { type ReactPaginateProps } from "react-paginate";
 
 interface PaginationProps {
+  currentPage: number;
   numPages: number;
+  handlePageClick: ReactPaginateProps["onPageChange"];
 }
 
-const Pagination: React.FC<PaginationProps> = ({ numPages }) => {
-  const currentPage = parseInt(useRouter().query.page as string);
-  const handlePageClick: ReactPaginateProps["onPageChange"] = (e) => {
-    window.location.href = `/blogs/${e.selected + 1}`;
-  };
+const Pagination: React.FC<PaginationProps> = ({
+  currentPage,
+  numPages,
+  handlePageClick,
+}) => {
   const handleActivePageClick: ReactPaginateProps["onPageActive"] = () => {
     window.scrollTo({ top: 0 });
   };

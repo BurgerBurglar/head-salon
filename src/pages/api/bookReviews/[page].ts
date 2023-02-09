@@ -7,6 +7,6 @@ export default async function handler(
 ) {
   if (req.method !== "GET") return res.status(405);
   const page = parseInt(req.query.page as string);
-  const bookReviews = await fetchBookReviews(page, 9);
+  const { data: bookReviews } = await fetchBookReviews(page, 9);
   res.status(200).json(bookReviews);
 }

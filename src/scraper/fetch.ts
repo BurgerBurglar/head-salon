@@ -57,13 +57,22 @@ export const fetchCommentsInFront = async (id: number) => {
   return result.data;
 };
 
-export const fetchBookReviews = async (page?: number, limit?: number) => {
-  const result = await doubanAxios.get<string>("/reviews");
+export const fetchBookReviews = async (page = 1, limit?: number) => {
+  const REVIEWS_PER_PAGE = 10;
+  const result = await doubanAxios.get<string>("/reviews", {
+    params: { start: (page - 1) * REVIEWS_PER_PAGE },
+  });
   const html = result.data;
   const soup = parse(html);
+  const numPages = parseInt(
+    soup.querySelector(".paginator>.thispage")!.getAttribute("data-total-page")!
+  );
   const booksSoup = soup.querySelectorAll(".main.review-item");
   const bookReviews = booksSoup.map(parseBookReviews);
-  return bookReviews.slice(0, limit);
+  return {
+    data: bookReviews.slice(0, limit),
+    numPages,
+  };
 };
 
 export const fetchBookReviewsInFront = async (page: number) => {
