@@ -30,7 +30,7 @@ const BookReview: React.FC<BookReview> = ({
         {bookTitle}
       </div>
       <h3
-        className="text-md mt-2 text-center text-pink-500 line-clamp-2
+        className="text-md mt-2 text-center text-pink-600 line-clamp-2
       hover:underline"
       >
         <Link href={url}>{title}</Link>

@@ -24,7 +24,7 @@ const Home: NextPage = () => {
       <div className="flex justify-center">
         <Link
           href="/reviews/1"
-          className="mt-5 rounded-lg border border-pink-500 px-3 py-1 text-pink-500
+          className="mt-5 rounded-lg border border-pink-600 px-3 py-1 text-pink-600
           hover:bg-pink-50 active:bg-pink-100
           "
         >
