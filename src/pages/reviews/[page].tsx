@@ -17,7 +17,7 @@ const Reviews: NextPage<Props> = ({ bookReviews, numPages }) => {
   };
   return (
     <>
-      <BookReviewSection bookReviews={bookReviews} />
+      <BookReviewSection bookReviews={bookReviews} className="mt-6" />
       <Pagination
         currentPage={currentPage}
         numPages={numPages}
