@@ -4,6 +4,7 @@ import PostCard from "../../components/posts/PostCard";
 import { getPosts } from "../../scraper/fetch";
 import { type PostSummary } from "../../types";
 import getNumPages from "../../utils/getNumPages";
+import { rangeFrom1 } from "../../utils/misc";
 
 interface Props {
   posts: PostSummary[];
@@ -25,8 +26,8 @@ const Home: NextPage<Props> = ({ posts, numPages }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = () => {
-  const paths = [1, 2, 3].map((n) => ({
-    params: { page: (n + 1).toString() },
+  const paths = rangeFrom1(151).map((n) => ({
+    params: { page: n.toString() },
   }));
   return {
     paths,

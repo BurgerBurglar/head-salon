@@ -1,5 +1,6 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
+import { type ParsedUrlQuery } from "querystring";
 import ReviewMeta from "../../../components/books/ReviewMeta";
 import { fetchDoubanReviewArticle } from "../../../scraper/fetch";
 import type { BookReviewArticle } from "../../../types";
@@ -28,9 +29,7 @@ const ReviewArticle: NextPage<BookReviewArticle> = ({
 };
 
 export const getStaticPaths: GetStaticPaths = () => {
-  const paths = [].map((n: number) => ({
-    params: { id: n.toString() },
-  }));
+  const paths: { params: ParsedUrlQuery }[] = [];
   return {
     paths,
     fallback: "blocking",

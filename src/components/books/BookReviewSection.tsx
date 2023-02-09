@@ -1,5 +1,5 @@
 import React from "react";
-import { range } from "../../utils/misc";
+import { rangeFrom1 } from "../../utils/misc";
 import BookReview from "./BookReview";
 import BookReviewSkeleton from "./BookReviewSkeleton";
 import { twMerge } from "tailwind-merge";
@@ -21,7 +21,7 @@ const BookReviewSection: React.FC<Props> = ({ bookReviews, className }) => {
         <BookReview key={review.id} {...review} />
       ))}
       {bookReviews.length === 0 &&
-        range(9).map((n) => <BookReviewSkeleton key={n} />)}
+        rangeFrom1(9).map((n) => <BookReviewSkeleton key={n} />)}
     </div>
   );
 };

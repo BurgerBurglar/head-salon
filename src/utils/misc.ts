@@ -20,4 +20,4 @@ export const getStars = (rating: number, ratingOutOf: RatingOutOf) => {
   };
 };
 
-export const range = (n: number) => [...Array(n).keys()];
+export const rangeFrom1 = (n: number) => [...Array(n).keys()].map((n) => n + 1);

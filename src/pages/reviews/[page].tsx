@@ -5,12 +5,12 @@ import BookReviewSection from "../../components/books/BookReviewSection";
 import Pagination from "../../components/Pagination";
 import { fetchBookReviews } from "../../scraper/fetch";
 import type { BookReview } from "../../types";
+import { rangeFrom1 } from "../../utils/misc";
 interface Props {
   bookReviews: BookReview[];
   numPages: number;
 }
 const Reviews: NextPage<Props> = ({ bookReviews, numPages }) => {
-  console.log({ numPages });
   const currentPage = parseInt(useRouter().query.page as string);
   const handlePageClick: ReactPaginateProps["onPageChange"] = (e) => {
     window.location.href = `/reviews/${e.selected + 1}`;
@@ -28,7 +28,7 @@ const Reviews: NextPage<Props> = ({ bookReviews, numPages }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = () => {
-  const paths = [1, 2, 3].map((n) => ({
+  const paths = rangeFrom1(9).map((n) => ({
     params: { page: (n + 1).toString() },
   }));
   return {
