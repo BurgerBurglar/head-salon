@@ -12,7 +12,10 @@ const Stars: React.FC<StarsProps> = ({ rating, outOf }) => {
   const stars = getStars(rating, outOf);
 
   return (
-    <span className="flex text-amber-500" aria-label={`rating ${rating}/5`}>
+    <span
+      className="flex text-amber-500"
+      aria-label={`评分 ${rating}/${outOf}`}
+    >
       {rangeFrom1(stars.whole).map((n) => (
         <Star key={n} className="w-4 fill-amber-500" />
       ))}

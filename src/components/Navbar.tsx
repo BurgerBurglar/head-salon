@@ -68,7 +68,7 @@ const Navbar: React.FC = () => {
           hover:bg-slate-200
           focus:bg-slate-200 focus:ring-pink-200
           sm:hidden"
-          aria-label="menu"
+          aria-label="菜单"
           onClick={() => setIsMenuOpen((prev) => !prev)}
         >
           {isMenuOpen ? (
