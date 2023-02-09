@@ -1,17 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "lucide-react";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import type { ParsedUrlQuery } from "querystring";
 import Comment from "../../../components/posts/Comment";
 import PostMeta from "../../../components/posts/PostMeta";
-import {
-  CopyTooltipContent,
-  TooltipWrapper,
-} from "../../../components/Tooltip";
 import { fetchCommentsInFront, getPost } from "../../../scraper/fetch";
 import { type Post } from "../../../types";
-import { handleCopy } from "../../../utils/misc";
 
 const Post: NextPage<Post> = ({
   id,
@@ -35,13 +29,6 @@ const Post: NextPage<Post> = ({
       <main className="article">
         <div className="flex items-center gap-2 ">
           <h2>{title}</h2>
-          <TooltipWrapper side="right" content={<CopyTooltipContent />}>
-            <Link
-              className="cursor-pointer text-pink-500 hover:underline"
-              aria-label="copy link"
-              onClick={() => handleCopy(window.location.href)}
-            />
-          </TooltipWrapper>
         </div>
         <PostMeta date={date} numRead={numRead} category={category} />
         <article dangerouslySetInnerHTML={{ __html: body }} />
