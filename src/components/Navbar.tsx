@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 
 const NAV_PATHS = [
   { path: "/blogs/1", name: "博文" },
+  { path: "/reviews/1", name: "书评" },
   { path: "/intro", name: "介绍" },
   { path: "/author", name: "作者" },
   { path: "/copyright", name: "版权" },
@@ -16,10 +17,8 @@ const NAV_PATHS = [
 const Navbar: React.FC = () => {
   const { asPath: pathname } = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const isBlog =
-    pathname === "/" ||
-    pathname.includes("/blogs/") ||
-    pathname.includes("/posts/");
+  const isBlog = pathname.includes("/blogs/") || pathname.includes("/posts/");
+  const isReview = pathname.includes("/reviews");
   return (
     <nav className="z-100 fixed w-full bg-amber-100">
       <div className="mx-auto flex max-w-3xl items-center justify-between px-2">
@@ -39,9 +38,10 @@ const Navbar: React.FC = () => {
 
         <ul className="mr-2 hidden gap-2 sm:flex">
           {NAV_PATHS.map(({ path, name }) => {
-            const shouldUnderline = isBlog
-              ? name === "博文"
-              : path === pathname;
+            const shouldUnderline =
+              (isBlog && name === "博文") ||
+              (isReview && name == "书评") ||
+              path === pathname;
             return (
               <li
                 key={path}
