@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { BookReview } from "../../types";
 import Stars from "./Stars";
@@ -8,8 +9,11 @@ const BookReview: React.FC<BookReview> = ({
   rating,
   title,
   bookTitle,
+  isBlog,
+  reviewId,
 }) => {
   const imgWidth = 150;
+  const url = isBlog ? `/posts/${reviewId}` : `/reviews/${reviewId}`;
   return (
     <div className="flex flex-col items-center">
       <Image
@@ -24,7 +28,7 @@ const BookReview: React.FC<BookReview> = ({
         {bookTitle}
       </div>
       <h3 className="text-md mt-2 text-center text-pink-500 line-clamp-2">
-        {title}
+        <Link href={url}>{title}</Link>
       </h3>
       {rating !== undefined && <Stars rating={rating} outOf={5} />}
     </div>

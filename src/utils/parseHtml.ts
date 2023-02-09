@@ -155,5 +155,10 @@ export const parseBookReviews = (book: HTMLElement): BookReview => {
   const title = book.querySelector("h2>a")!.text;
   const summary = book.querySelector(".short-content")!.text.trim();
 
-  return { id, bookTitle, imgUrl, rating, title, summary };
+  const BLOG_URL_REGEX = /https:\/\/headsalon.org\/archives\/\d+.html/;
+  const blogUrlMatches = summary.match(BLOG_URL_REGEX);
+  const isBlog = blogUrlMatches !== null;
+  const reviewId = blogUrlMatches?.length ? getPostId(blogUrlMatches[0]) : id;
+
+  return { id, bookTitle, imgUrl, rating, title, isBlog, reviewId };
 };

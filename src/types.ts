@@ -52,9 +52,10 @@ export interface BookReview {
   id: number;
   bookTitle: string;
   imgUrl: string;
-  rating: number | undefined;
+  rating?: number;
   title: string;
-  summary: string;
+  isBlog: boolean;
+  reviewId: number;
 }
 
 export type RatingOutOf = 5 | 10;
