@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getComments } from "../../../../scraper/fetch";
+import { getComments } from "../../../../../scraper/fetch";
 
 export default async function handler(
   req: NextApiRequest,

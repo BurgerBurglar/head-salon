@@ -54,7 +54,7 @@ export const getComments = async (id: number): Promise<Comment[]> => {
 };
 
 export const fetchCommentsInFront = async (id: number) => {
-  const result = await axios.get<Comment[]>(`/api/posts/${id}/comments`);
+  const result = await axios.get<Comment[]>(`/api/blogs/post/${id}/comments`);
   return result.data;
 };
 
