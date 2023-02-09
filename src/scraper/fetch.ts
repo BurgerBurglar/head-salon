@@ -11,7 +11,7 @@ import {
 } from "../utils/parseHtml";
 import { cleanHtml } from "../utils/string";
 
-const axiosInstance = axios.create({
+const headAxios = axios.create({
   baseURL: "https://headsalon.org/",
 });
 
@@ -20,7 +20,7 @@ const doubanAxios = axios.create({
 });
 
 export const getPosts = async (page: number) => {
-  const result = await axiosInstance.get<string>(`/page/${page}`);
+  const result = await headAxios.get<string>(`/page/${page}`);
   const html = result.data;
   const soup = parse(cleanHtml(html));
   const posts = soup.querySelectorAll(".post");
@@ -30,7 +30,7 @@ export const getPosts = async (page: number) => {
 };
 
 export const getNumPosts = async () => {
-  const result = await axiosInstance.get<string>(
+  const result = await headAxios.get<string>(
     "/wordpress/wp-content/themes/Salon/catalog-ajax.php?q=count&filter=true"
   );
   const numPosts = parseInt(result.data);
@@ -39,7 +39,7 @@ export const getNumPosts = async () => {
 
 // run on build time
 export const getPost = async (id: number): Promise<Post> => {
-  const result = await axiosInstance.get<string>(`/archives/${id}.html`);
+  const result = await headAxios.get<string>(`/archives/${id}.html`);
   const html = result.data;
   const soup = parse(html);
   return parsePost(soup);
@@ -47,7 +47,7 @@ export const getPost = async (id: number): Promise<Post> => {
 
 // run on request time
 export const getComments = async (id: number): Promise<Comment[]> => {
-  const result = await axiosInstance.get<string>(`/archives/${id}.html`);
+  const result = await headAxios.get<string>(`/archives/${id}.html`);
   const html = result.data;
   const soup = parse(html);
   return parseComments(soup);
@@ -56,6 +56,15 @@ export const getComments = async (id: number): Promise<Comment[]> => {
 export const fetchCommentsInFront = async (id: number) => {
   const result = await axios.get<Comment[]>(`/api/posts/${id}/comments`);
   return result.data;
+};
+
+export const fetchSearchPosts = async (q: string) => {
+  const result = await headAxios.get<string>("/", { params: { s: q } });
+  const html = result.data;
+  const soup = parse(cleanHtml(html));
+  const posts = soup.querySelectorAll(".post");
+  const postsSummary: PostSummary[] = posts.map(parsePostSummary);
+  return postsSummary;
 };
 
 export const fetchBookReviews = async (page = 1, limit?: number) => {
