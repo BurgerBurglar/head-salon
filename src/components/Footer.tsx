@@ -1,3 +1,4 @@
+import { Github } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
@@ -28,6 +29,14 @@ const Footer: React.FC = () => {
           Site hosted by:{" "}
           <Link className="underline" href="https://shuo.rocks">
             Shuo Tian
+          </Link>
+        </div>
+        <div>
+          <Link
+            className="flex items-center gap-1 underline"
+            href="https://github.com/BurgerBurglar/head-salon"
+          >
+            <Github /> View the code on GitHub
           </Link>
         </div>
       </div>
