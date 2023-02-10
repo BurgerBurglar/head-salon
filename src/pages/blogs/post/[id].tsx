@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
-import type { ParsedUrlQuery } from "querystring";
 import Comment from "../../../components/posts/Comment";
 import PostMeta from "../../../components/posts/PostMeta";
 import { fetchCommentsInFront, fetchPost } from "../../../scraper/fetch";
 import { type Post } from "../../../types";
+import { rangeFrom1 } from "../../../utils/misc";
 
 const Post: NextPage<Post> = ({
   id,
@@ -56,7 +56,10 @@ const Post: NextPage<Post> = ({
 };
 
 export const getStaticPaths: GetStaticPaths = () => {
-  const paths: { params: ParsedUrlQuery }[] = [];
+  const CURRENT_LARGEST_POST_ID = 9023;
+  const paths = rangeFrom1(CURRENT_LARGEST_POST_ID).map((n) => ({
+    params: { id: n.toString() },
+  }));
   return {
     paths,
     fallback: "blocking",
@@ -65,9 +68,15 @@ export const getStaticPaths: GetStaticPaths = () => {
 
 export const getStaticProps: GetStaticProps<Post> = async ({ params }) => {
   const id = parseInt(params?.id as string);
-  const post = await fetchPost(id);
-  return {
-    props: post,
-  };
+  try {
+    const post = await fetchPost(id);
+    return {
+      props: post,
+    };
+  } catch (error) {
+    return {
+      notFound: true,
+    };
+  }
 };
 export default Post;
