@@ -34,7 +34,7 @@ const SearchButton: React.FC = () => {
           <Search width="1.3em" className="mx-3 text-slate-500" />
           <input
             className="flex h-11 w-full rounded-md bg-transparent
-            py-3 text-sm outline-none
+            py-3 text-lg outline-none
             placeholder:text-slate-400"
             type="text"
             placeholder="搜索文章"
