@@ -49,6 +49,7 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
       posts,
       numPages,
     },
+    revalidate: 60 * 5,
   };
 };
 

@@ -40,6 +40,12 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
   const { numPages } = await fetchBookReviews();
   const page = parseInt(params?.page as string);
   const { data: bookReviews } = await fetchBookReviews(page);
-  return { props: { bookReviews, numPages } };
+  return {
+    props: {
+      bookReviews,
+      numPages,
+    },
+    revalidate: 60 * 5,
+  };
 };
 export default Reviews;
