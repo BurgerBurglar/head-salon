@@ -45,4 +45,16 @@ html {
   table {
     @apply max-w-full;
   }
+  .wp-caption {
+    @apply mx-auto flex max-w-lg flex-col items-center;
+    a {
+      @apply w-full;
+      img {
+        @apply w-full;
+      }
+    }
+    .wp-caption-text {
+      @apply mt-0 text-sm leading-6 text-slate-500;
+    }
+  }
 }
