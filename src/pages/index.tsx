@@ -10,7 +10,7 @@ const Home: NextPage = () => {
   const bookReviews = useBookReviews();
   return (
     <main>
-      <h2 className="my-4 text-start text-xl font-bold text-pink-600">
+      <h2 className="my-4 text-start text-2xl font-bold text-pink-600">
         辉格的书
       </h2>
       <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4">
@@ -19,7 +19,7 @@ const Home: NextPage = () => {
         ))}
       </div>
 
-      <h2 className="my-4 text-start text-xl font-bold text-pink-600">
+      <h2 className="my-4 text-start text-2xl font-bold text-pink-600">
         最新博文
       </h2>
       <BlogSection />
@@ -33,7 +33,7 @@ const Home: NextPage = () => {
           查看全部
         </Link>
       </div>
-      <h2 className="my-4 text-start text-xl font-bold text-pink-600">
+      <h2 className="my-4 text-start text-2xl font-bold text-pink-600">
         辉格的书评
       </h2>
       <BookReviewSection bookReviews={bookReviews.data} />
