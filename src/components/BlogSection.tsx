@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { fetchPostsInFront } from "../scraper/fetch";
+import { fetchPostsSummaryInFront } from "../scraper/fetch";
 import { rangeFrom1 } from "../utils/misc";
 import PostCard from "./posts/PostCard";
 import PostSkeleton from "./posts/PostSkeleton";
@@ -8,7 +8,7 @@ import PostSkeleton from "./posts/PostSkeleton";
 const BlogSection: React.FC = () => {
   const { data: posts } = useQuery({
     queryKey: ["posts"],
-    queryFn: () => fetchPostsInFront(1),
+    queryFn: () => fetchPostsSummaryInFront(1),
   });
   return (
     <section className="flex flex-col">

@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getPosts } from "../../../scraper/fetch";
+import { fetchPostsSummary } from "../../../scraper/fetch";
 
 export default async function handler(
   req: NextApiRequest,
@@ -7,6 +7,6 @@ export default async function handler(
 ) {
   if (req.method !== "GET") return res.status(405);
   const page = parseInt(req.query.page as string);
-  const posts = await getPosts(page);
+  const posts = await fetchPostsSummary(page);
   res.status(200).json(posts.slice(0, 5));
 }

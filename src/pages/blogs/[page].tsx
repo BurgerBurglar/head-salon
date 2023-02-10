@@ -1,7 +1,7 @@
 import { type GetStaticPaths, type GetStaticProps, type NextPage } from "next";
 import PostPagination from "../../components/posts/PostPagination";
 import PostCard from "../../components/posts/PostCard";
-import { getPosts } from "../../scraper/fetch";
+import { fetchPostsSummary } from "../../scraper/fetch";
 import { type PostSummary } from "../../types";
 import getNumPages from "../../utils/getNumPages";
 import { rangeFrom1 } from "../../utils/misc";
@@ -42,7 +42,7 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
     return {
       notFound: true,
     };
-  const posts = await getPosts(page);
+  const posts = await fetchPostsSummary(page);
   const numPages = await getNumPages();
   return {
     props: {

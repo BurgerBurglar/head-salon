@@ -19,7 +19,7 @@ const doubanAxios = axios.create({
   baseURL: "https://www.douban.com/people/whigzhou",
 });
 
-export const getPosts = async (page: number) => {
+export const fetchPostsSummary = async (page: number) => {
   const result = await headAxios.get<string>(`/page/${page}`);
   const html = result.data;
   const soup = parse(cleanHtml(html));
@@ -29,12 +29,12 @@ export const getPosts = async (page: number) => {
   return postAbstract.filter(({ id }) => id !== 1);
 };
 
-export const fetchPostsInFront = async (page: number) => {
+export const fetchPostsSummaryInFront = async (page: number) => {
   const result = await axios.get<PostSummary[]>(`/api/blogs/${page}`);
   return result.data;
 };
 
-export const getNumPosts = async () => {
+export const fetchNumPosts = async () => {
   const result = await headAxios.get<string>(
     "/wordpress/wp-content/themes/Salon/catalog-ajax.php?q=count&filter=true"
   );
@@ -43,7 +43,7 @@ export const getNumPosts = async () => {
 };
 
 // run on build time
-export const getPost = async (id: number): Promise<Post> => {
+export const fetchPost = async (id: number): Promise<Post> => {
   const result = await headAxios.get<string>(`/archives/${id}.html`);
   const html = result.data;
   const soup = parse(html);
@@ -51,7 +51,7 @@ export const getPost = async (id: number): Promise<Post> => {
 };
 
 // run on request time
-export const getComments = async (id: number): Promise<Comment[]> => {
+export const fetchComments = async (id: number): Promise<Comment[]> => {
   const result = await headAxios.get<string>(`/archives/${id}.html`);
   const html = result.data;
   const soup = parse(html);

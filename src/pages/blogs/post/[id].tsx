@@ -4,7 +4,7 @@ import Head from "next/head";
 import type { ParsedUrlQuery } from "querystring";
 import Comment from "../../../components/posts/Comment";
 import PostMeta from "../../../components/posts/PostMeta";
-import { fetchCommentsInFront, getPost } from "../../../scraper/fetch";
+import { fetchCommentsInFront, fetchPost } from "../../../scraper/fetch";
 import { type Post } from "../../../types";
 
 const Post: NextPage<Post> = ({
@@ -65,7 +65,7 @@ export const getStaticPaths: GetStaticPaths = () => {
 
 export const getStaticProps: GetStaticProps<Post> = async ({ params }) => {
   const id = parseInt(params?.id as string);
-  const post = await getPost(id);
+  const post = await fetchPost(id);
   return {
     props: post,
   };
