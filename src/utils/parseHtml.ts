@@ -17,28 +17,28 @@ import {
 } from "./string";
 
 export const parsePostSummary = (post: HTMLElement) => {
-  const url = post.querySelector(".post-title")!.querySelector("a")!.attributes[
-    "href"
-  ]!;
-  const id = getPostId(url);
+  try {
+    const url = post.querySelector(".post-title")!.querySelector("a")!
+      .attributes["href"]!;
+    const id = getPostId(url);
 
-  const title = post.querySelector(".post-title")!.text.trim();
+    const title = post.querySelector(".post-title")!.text.trim();
 
-  const { date, numRead, category } = parsePostMeta(post);
+    const { date, numRead, category } = parsePostMeta(post);
+    const postEntry = post.querySelector(".post-entry")!.text.trim();
+    const contentWithoutFiller = removeFiller(postEntry.substring(0, 200));
+    const contentWithoutTitle = removePrefix(contentWithoutFiller, title);
+    const abstract = removePrefix(contentWithoutTitle, "辉格");
 
-  const postEntry = post.querySelector(".post-entry")!.text.trim();
-  const contentWithoutFiller = removeFiller(postEntry.substring(0, 200));
-  const contentWithoutTitle = removePrefix(contentWithoutFiller, title);
-  const abstract = removePrefix(contentWithoutTitle, "辉格");
-
-  return {
-    id,
-    title,
-    date,
-    numRead,
-    abstract,
-    category,
-  };
+    return {
+      id,
+      title,
+      date,
+      numRead,
+      abstract,
+      category,
+    };
+  } catch (e) {}
 };
 
 export const parsePostMeta = (post: HTMLElement) => {

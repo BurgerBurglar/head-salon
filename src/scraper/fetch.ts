@@ -24,7 +24,9 @@ export const fetchPostsSummary = async (page: number) => {
   const html = result.data;
   const soup = parse(cleanHtml(html));
   const posts = soup.querySelectorAll(".post");
-  const postAbstract: PostSummary[] = posts.map(parsePostSummary);
+  const postAbstract = posts
+    .map(parsePostSummary)
+    .filter((e) => e !== undefined) as PostSummary[];
   // remove top post because who cares
   return postAbstract.filter(({ id }) => id !== 1);
 };
@@ -68,7 +70,9 @@ export const fetchSearchPosts = async (q: string) => {
   const html = result.data;
   const soup = parse(cleanHtml(html));
   const posts = soup.querySelectorAll(".post");
-  const postsSummary: PostSummary[] = posts.map(parsePostSummary);
+  const postsSummary = posts
+    .map(parsePostSummary)
+    .filter((e) => e !== undefined) as PostSummary[];
   return postsSummary;
 };
 
