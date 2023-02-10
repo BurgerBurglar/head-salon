@@ -23,6 +23,8 @@ const SearchButton: React.FC = () => {
     text-slate-600 
     transition-colors hover:bg-slate-100 focus:outline-none focus:ring-2 
     focus:ring-slate-400 focus:ring-offset-2"
+            style={{ WebkitAppearance: "none" }}
+            // fixes iOS Chrome display issue
           >
             <Search width="1.3em" className="mr-2" />
             搜索文章
