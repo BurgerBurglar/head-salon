@@ -16,13 +16,13 @@ const SearchButton: React.FC = () => {
         <div className="flex w-full max-w-sm items-center space-x-2">
           <button
             className="sm:max-w-30 relative inline-flex h-9 
-    w-full min-w-[130px] items-center 
-    justify-start rounded-md border 
-    border-slate-400 bg-transparent py-2 px-4 
-    text-sm font-medium 
-    text-slate-600 
-    transition-colors hover:bg-slate-100 focus:outline-none focus:ring-2 
-    focus:ring-slate-400 focus:ring-offset-2"
+    w-full min-w-[130px] appearance-none 
+    items-center justify-start rounded-md 
+    border border-slate-400 bg-transparent py-2 
+    px-4 text-sm 
+    font-medium 
+    text-slate-600 transition-colors hover:bg-slate-100 focus:outline-none 
+    focus:ring-2 focus:ring-slate-400 focus:ring-offset-2"
             style={{ WebkitAppearance: "none" }}
             // fixes iOS Chrome display issue
           >
