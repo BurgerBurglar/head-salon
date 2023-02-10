@@ -1,10 +1,10 @@
 import { type NextPage } from "next";
 import Link from "next/link";
-import useBookReviews from "../../public/hooks/useBookReviews";
 import BlogSection from "../components/BlogSection";
 import BookReviewSection from "../components/books/BookReviewSection";
 import BookSummary from "../components/index/BookSummary";
 import { PUBLISHED_BOOKS } from "../constants";
+import useBookReviews from "../hooks/useBookReviews";
 
 const Home: NextPage = () => {
   const bookReviews = useBookReviews();
