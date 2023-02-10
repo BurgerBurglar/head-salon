@@ -1,3 +1,4 @@
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import React from "react";
 import ReactPaginate, { type ReactPaginateProps } from "react-paginate";
 
@@ -18,7 +19,7 @@ const Pagination: React.FC<PaginationProps> = ({
 
   return (
     <ReactPaginate
-      className="mx-auto mt-8 flex w-fit gap-2 font-bold text-slate-600"
+      className="mt-8 flex flex-wrap justify-center gap-2 font-bold text-slate-600"
       pageLinkClassName="grid h-[2em] w-[2em] place-items-center rounded-md hover:bg-slate-200"
       activeLinkClassName="bg-pink-600 text-white hover:bg-pink-600"
       previousLinkClassName="grid h-[2em] w-[2em] place-items-center rounded-md hover:bg-slate-200"
@@ -26,10 +27,10 @@ const Pagination: React.FC<PaginationProps> = ({
       disabledClassName="hidden"
       pageCount={numPages}
       forcePage={currentPage - 1}
-      marginPagesDisplayed={2}
-      pageRangeDisplayed={1}
-      previousLabel="«"
-      nextLabel="»"
+      marginPagesDisplayed={1}
+      pageRangeDisplayed={2}
+      previousLabel={<ChevronLeft />}
+      nextLabel={<ChevronRight />}
       hrefBuilder={(page) => `/blogs/${page}`}
       onPageChange={handlePageClick}
       disableInitialCallback
