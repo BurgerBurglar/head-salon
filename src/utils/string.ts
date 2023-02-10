@@ -24,3 +24,6 @@ export const getDoubanRating = (className?: string) => {
   const rating = parseInt(starString) / 10;
   return rating;
 };
+
+export const removeInlineStyles = (html: string) =>
+  html.replace(/style="(.*?)" /g, "");

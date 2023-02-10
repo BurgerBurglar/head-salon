@@ -9,7 +9,7 @@ import {
   parsePostSummary,
   parseReviewArticle,
 } from "../utils/parseHtml";
-import { cleanHtml } from "../utils/string";
+import { cleanHtml, removeInlineStyles } from "../utils/string";
 
 const headAxios = axios.create({
   baseURL: "https://headsalon.org/",
@@ -48,7 +48,7 @@ export const fetchNumPosts = async () => {
 export const fetchPost = async (id: number): Promise<Post> => {
   const result = await headAxios.get<string>(`/archives/${id}.html`);
   const html = result.data;
-  const soup = parse(html);
+  const soup = parse(removeInlineStyles(html));
   return parsePost(soup);
 };
 
