@@ -18,5 +18,8 @@ const config = {
     domains: ["doubanio.com"],
     remotePatterns: [{ protocol: "https", hostname: "**.doubanio.com" }],
   },
+  experimental: {
+    appDir: true,
+  },
 };
 export default config;
