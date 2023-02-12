@@ -6,7 +6,7 @@ html {
   @apply scroll-pt-20 scroll-smooth;
 }
 
-#__next {
+body {
   @apply flex min-h-[100dvh] flex-col justify-between;
 }
 
