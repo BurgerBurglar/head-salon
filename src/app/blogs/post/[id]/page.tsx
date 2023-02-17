@@ -37,9 +37,12 @@ export default async function Post({ params }: Props) {
   }
 }
 export function generateStaticParams() {
+  const FIRST_POST_TO_BUILD = 8023;
   const CURRENT_LARGEST_POST_ID = 9023;
-  const paths = rangeFrom1(CURRENT_LARGEST_POST_ID).map((n) => ({
-    id: n.toString(),
-  }));
+  const paths = rangeFrom1(CURRENT_LARGEST_POST_ID)
+    .slice(FIRST_POST_TO_BUILD)
+    .map((n) => ({
+      id: n.toString(),
+    }));
   return paths;
 }
