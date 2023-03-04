@@ -65,14 +65,19 @@ export const metadata = {
   icons: {
     icon: "/favicon.ico",
   },
-  referrer: "origin-when-crossorigin",
+  referrer: "origin-when-cross-origin",
   keywords: ["博客", "辉格", "海德沙龙"],
-  authors: ["辉格"],
+  authors: [
+    {
+      name: "辉格",
+      url: "https://weibo.com/whigzhou",
+    },
+  ],
   creator: "Shuo Tian",
   formatDetection: {
-    email: "yes",
-    address: "yes",
-    telephone: "yes",
+    email: true,
+    address: true,
+    telephone: true,
   },
   openGraph: {
     title: "海德沙龙",
@@ -81,9 +86,9 @@ export const metadata = {
     siteName: "https://shuo.rocks",
     images: [
       {
-        url: "/favicon.ico",
-        width: 800,
-        height: 600,
+        url: "https://head-salon.shuo.rocks/_next/image?url=%2Ffavicon.ico&w=128&q=75",
+        width: 128,
+        height: 128,
       },
     ],
     locale: "zh-CN",
