@@ -3,6 +3,7 @@ import PostMeta from "../../../(posts)/PostMeta";
 import { fetchPost } from "../../../../scraper/fetch";
 import { rangeFrom1 } from "../../../../utils/misc";
 import CommentSection from "./CommentSection";
+import type { Metadata } from "next";
 
 interface Props {
   params: { id: string };
@@ -45,4 +46,15 @@ export function generateStaticParams() {
       id: n.toString(),
     }));
   return paths;
+}
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const id = parseInt(params.id);
+  try {
+    const { title } = await fetchPost(id);
+    return {
+      title,
+    };
+  } catch (error) {
+    notFound();
+  }
 }

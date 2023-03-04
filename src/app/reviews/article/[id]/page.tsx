@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ReviewMeta from "../../../(books)/ReviewMeta";
 import { fetchDoubanReviewArticle } from "../../../../scraper/fetch";
@@ -19,8 +20,19 @@ export default async function ReviewArticle({ params }: Props) {
         <article dangerouslySetInnerHTML={{ __html: body }} />
       </main>
     );
-
   } catch (error) {
-    notFound()
+    notFound();
+  }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const id = parseInt(params.id);
+  try {
+    const { title } = await fetchDoubanReviewArticle(id);
+    return {
+      title,
+    };
+  } catch (error) {
+    notFound();
   }
 }
