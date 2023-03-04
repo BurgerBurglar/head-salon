@@ -16,7 +16,13 @@ const BookSummary: React.FC<BookSummary> = ({
   return (
     <div className="flex items-center justify-center gap-2 border border-slate-200 px-2">
       <Link href={buyAt}>
-        <Image src={coverPhoto} alt={title} width={100} height={141} />
+        <Image
+          className="h-[141px] w-[100px]"
+          src={coverPhoto}
+          alt={title}
+          width={100}
+          height={141}
+        />
       </Link>
       <div className="flex-1">
         <h3

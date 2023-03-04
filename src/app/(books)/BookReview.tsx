@@ -19,11 +19,11 @@ const BookReview: React.FC<BookReview> = ({
   return (
     <div className="flex flex-col items-center">
       <Image
+        className="h-auto w-[150px] object-contain"
         src={imgUrl}
         alt={bookTitle}
         width={imgWidth}
         height={imgWidth * 1.414}
-        className="h-[212px] object-contain"
         priority
       />
       <div className="text-center text-sm text-slate-500 line-clamp-1">
