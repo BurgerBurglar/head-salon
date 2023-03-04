@@ -29,7 +29,7 @@ export const PUBLISHED_BOOKS: BookSummary[] = [
     coverPhoto: "/自由的进化.jpg",
     doubanRating: 8.1,
     publishYear: 2017,
-    role: "作者",
+    role: "译者",
     buyAt: "https://item.jd.com/11412640.html",
   },
   {

@@ -6,8 +6,19 @@ html {
   @apply scroll-pt-20 scroll-smooth;
 }
 
-#__next {
+body {
   @apply flex min-h-[100dvh] flex-col justify-between;
+}
+
+.mantine-Modal-overlay {
+  @apply mt-[68px];
+}
+
+.mantine-Paper-root.mantine-Modal-content {
+  @apply mt-[67px] bg-slate-100;
+  .mantine-Modal-body {
+    @apply flex min-w-[10em] flex-col gap-4 px-4 pt-10 text-center;
+  }
 }
 
 .article {
