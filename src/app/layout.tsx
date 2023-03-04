@@ -9,7 +9,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="zh-CN">
       <body>
         <Navbar />
         <div className="mx-auto mt-[68px] w-full max-w-3xl flex-1 py-2 px-4 pb-12">
