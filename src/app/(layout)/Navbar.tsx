@@ -6,6 +6,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 
 import { Button } from "@/app/(ui)/button";
+import { Drawer } from "@mantine/core";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
 import SearchButton from "./SearchButton";
@@ -82,34 +83,27 @@ const Navbar: React.FC = () => {
           )}
         </Button>
       </div>
-      {isMenuOpen && (
-        <div className="fixed right-0 flex h-full w-full">
+      <Drawer
+        position="right"
+        size={180}
+        opened={isMenuOpen}
+        withCloseButton={false}
+        onClose={() => setIsMenuOpen(false)}
+      >
+        {NAV_PATHS.map(({ path, name }) => (
           <div
-            className="flex-1 bg-black opacity-30"
-            onClick={() => setIsMenuOpen(false)}
-          />
-          <ul
-            className="flex min-w-[10em] flex-col gap-4 
-      bg-slate-100 px-4 pt-10 text-center sm:hidden"
+            key={path}
+            className={clsx("pb-1 text-slate-800 hover:text-pink-700", {
+              "border-b-4 border-pink-700": path === pathname,
+            })}
           >
-            {NAV_PATHS.map(({ path, name }) => (
-              <li
-                key={path}
-                className={clsx("pb-1 text-slate-800 hover:text-pink-700", {
-                  "border-b-4 border-pink-700": path === pathname,
-                })}
-              >
-                <a href={path} className="px-2">
-                  {name}
-                </a>
-              </li>
-            ))}
-            <li>
-              <SearchButton />
-            </li>
-          </ul>
-        </div>
-      )}
+            <a href={path} className="px-2">
+              {name}
+            </a>
+          </div>
+        ))}
+        <SearchButton />
+      </Drawer>
     </nav>
   );
 };
