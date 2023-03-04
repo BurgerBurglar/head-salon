@@ -2,13 +2,14 @@
 
 import { Dialog, DialogContent, DialogTrigger } from "@/app/(ui)/dialog";
 import { Search } from "lucide-react";
-import React, { useRef, type FormEventHandler } from "react";
+import { useSearchParams } from "next/navigation";
+import React, { useState, type FormEventHandler } from "react";
 
 const SearchButton: React.FC = () => {
-  const searchRef = useRef<HTMLInputElement>(null);
+  const searchParams = useSearchParams().get("q");
+  const [query, setQuery] = useState(searchParams ?? "");
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    const query = searchRef.current?.value;
     if (!query) return;
     window.location.href = `/blogs/search?q=${query}`;
   };
@@ -42,7 +43,8 @@ const SearchButton: React.FC = () => {
             placeholder:text-slate-400"
             type="text"
             placeholder="搜索文章"
-            ref={searchRef}
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
           />
         </form>
       </DialogContent>
