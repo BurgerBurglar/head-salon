@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import PostCard from "../../(posts)/PostSummary";
+import PostSummary from "../../(posts)/PostSummary";
 import { fetchSearchPosts } from "../../../scraper/fetch";
 
 interface Props {
@@ -21,7 +21,7 @@ export default async function Search({ searchParams }: Props) {
         </div>
       )}
       {posts.map((post) => {
-        return <PostCard key={post.id} {...post} />;
+        return <PostSummary key={post.id} {...post} search={q} />;
       })}
     </main>
   );
